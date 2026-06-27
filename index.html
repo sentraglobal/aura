@@ -3,16 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
-  <meta name="description" content="AURA — A personality audit game built for Indian college students. 100 questions. One score. Find out who you actually are." />
+  <meta name="description" content="AURA — A personality audit game built for Indian college students. 15 random questions. One score. Find out who you actually are." />
   <title>AURA — Personality Audit</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
 
   <style>
-    /* ============================================================
-       DESIGN TOKENS
-    ============================================================ */
     :root {
       --bg:          #0a0a0a;
       --bg-card:     #111111;
@@ -31,9 +28,6 @@
       --max-w:       430px;
     }
 
-    /* ============================================================
-       RESET & BASE
-    ============================================================ */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     html, body {
@@ -45,9 +39,6 @@
       overflow-x: hidden;
     }
 
-    /* ============================================================
-       APP WRAPPER
-    ============================================================ */
     #app {
       min-height: 100dvh;
       display: flex;
@@ -58,9 +49,6 @@
       position: relative;
     }
 
-    /* ============================================================
-       ANIMATED BACKGROUND MESH
-    ============================================================ */
     .bg-mesh {
       position: fixed;
       inset: 0;
@@ -99,7 +87,6 @@
       to   { transform: translateX(-50%) translateY(-40px) scale(1.08); }
     }
 
-    /* Particle dots */
     .particles {
       position: fixed;
       inset: 0;
@@ -123,9 +110,6 @@
       50%       { opacity: 0.6; transform: translateY(-20px); }
     }
 
-    /* ============================================================
-       SCREEN SYSTEM — screens are shown/hidden via JS
-    ============================================================ */
     .screen {
       position: relative;
       z-index: 1;
@@ -158,9 +142,6 @@
       to   { opacity: 0; transform: translateY(-24px); }
     }
 
-    /* ============================================================
-       SCREEN 1 — INTRO
-    ============================================================ */
     #screen-intro {
       text-align: center;
       gap: 32px;
@@ -245,9 +226,6 @@
       background: var(--text-dim);
     }
 
-    /* ============================================================
-       SCREEN 2 — NAME INPUT
-    ============================================================ */
     #screen-name {
       gap: 36px;
       padding: 20px 0;
@@ -314,9 +292,6 @@
       box-shadow: 0 0 0 3px var(--accent-soft);
     }
 
-    /* ============================================================
-       SCREEN 3 — QUESTION
-    ============================================================ */
     #screen-question {
       gap: 28px;
       padding: 16px 0 24px;
@@ -493,9 +468,6 @@
       line-height: 1.4;
     }
 
-    /* ============================================================
-       SCREEN 4 — RESULTS
-    ============================================================ */
     #screen-results {
       gap: 28px;
       padding: 16px 0;
@@ -690,9 +662,6 @@
       transform: translateY(-1px);
     }
 
-    /* ============================================================
-       SHARED BUTTON STYLES
-    ============================================================ */
     .btn-primary {
       width: 100%;
       padding: 17px 32px;
@@ -735,9 +704,6 @@
       transform: none;
     }
 
-    /* ============================================================
-       FOOTER HINT
-    ============================================================ */
     .hint-text {
       font-size: 12px;
       color: var(--text-dim);
@@ -745,9 +711,6 @@
       line-height: 1.6;
     }
 
-    /* ============================================================
-       DIVIDER
-    ============================================================ */
     .divider {
       width: 40px;
       height: 2px;
@@ -755,41 +718,23 @@
       border-radius: 100px;
     }
 
-    /* ============================================================
-       RESPONSIVE
-    ============================================================ */
     @media (min-width: 500px) {
       #app {
         padding: 32px 24px;
       }
     }
 
-    /* ============================================================
-       UTILITY
-    ============================================================ */
     .hidden { display: none !important; }
     .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); }
   </style>
 </head>
 
 <body>
-
-  <!-- ============================================================
-       ANIMATED BACKGROUND
-  ============================================================ -->
   <div class="bg-mesh" aria-hidden="true"></div>
   <div class="particles" id="particles" aria-hidden="true"></div>
 
-  <!-- ============================================================
-       APP ROOT
-  ============================================================ -->
   <main id="app" role="main">
-
-    <!-- ==========================================
-         SCREEN 1: INTRO
-    ========================================== -->
     <section id="screen-intro" class="screen active" aria-label="Welcome screen">
-
       <div class="logo-wrap">
         <div class="logo-icon" aria-hidden="true">
           <svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -798,7 +743,6 @@
             <path d="M22 4L22 22" stroke="#fff" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
           </svg>
         </div>
-
         <h1 class="logo-title">AURA</h1>
         <p class="logo-sub">Personality Audit</p>
       </div>
@@ -817,25 +761,14 @@
         <span>~2 min</span>
       </div>
 
-      <button
-        id="btn-start"
-        class="btn-primary"
-        onclick="goToName()"
-        aria-label="Start the AURA quiz"
-      >
+      <button id="btn-start" class="btn-primary" onclick="goToName()" aria-label="Start the AURA quiz">
         Start your AURA ✦
       </button>
 
       <p class="hint-text">No account needed · Results are private</p>
-
     </section>
 
-
-    <!-- ==========================================
-         SCREEN 2: NAME INPUT
-    ========================================== -->
     <section id="screen-name" class="screen" aria-label="Name entry screen">
-
       <div class="screen-header">
         <h2>What do we call<br/>you? 👋</h2>
         <p>We'll personalise your results with your name.</p>
@@ -869,19 +802,13 @@
       </button>
 
       <p class="hint-text">Your name is never stored or sent anywhere.</p>
-
     </section>
 
-
-    <!-- ==========================================
-         SCREEN 3: QUESTION
-    ========================================== -->
     <section id="screen-question" class="screen" aria-label="Question screen">
-
       <div class="progress-header">
         <div class="progress-meta">
           <span class="progress-label" id="q-category">Category</span>
-          <span class="progress-count" id="q-count" aria-live="polite">1 / 100</span>
+          <span class="progress-count" id="q-count" aria-live="polite">1 / 15</span>
         </div>
         <div class="progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="progress-bar-wrap">
           <div class="progress-fill" id="progress-fill"></div>
@@ -897,15 +824,9 @@
 
       <div class="options-list" id="options-list" role="group" aria-label="Answer options">
       </div>
-
     </section>
 
-
-    <!-- ==========================================
-         SCREEN 4: RESULTS
-    ========================================== -->
     <section id="screen-results" class="screen" aria-label="Results screen">
-
       <div class="aura-score-wrap">
         <span class="aura-score-label">Your AURA</span>
         <span class="aura-score" id="aura-score-display">0</span>
@@ -933,35 +854,26 @@
       </div>
 
       <p class="hint-text">Share with friends · See who's got the highest AURA</p>
-
     </section>
+  </main>
 
-  </main><!-- /#app -->
-
-
-  <!-- ============================================================
-       VANILLA JS — FULL AURA APP
-  ============================================================ -->
   <script>
     const state = {
       userName: '',
       currentQ: 0,
       answers: [],
       scores: { EQ: 0, Decision: 0, Social: 0, Ambition: 0, Awareness: 0 },
-      maxPerCategory: 0,
+      maxPerCategory: {},
       quizQuestions: []
     };
 
-    /* ============================================================
-       QUESTIONS ARRAY — ALL 100 QUESTIONS FROM BANK
-    ============================================================ */
     const questions = [
       {"question":"Exam results aaye. Tu pass, tera best friend fail. Tu:","options":["\"Arre yaar next time ho jayega\" bolke move on karta hai","Genuinely bura lagta hai, usse call karta hai","Happy feel karta hai but andar se guilty bhi","Kuch nahi karta, awkward feel hota hai"],"scores":[2,4,3,1],"category":"EQ"},
       {"question":"Group chat mein kisi ne tujhe publicly roast kiya. Tu:","options":["Double roast karta hai wapas, full savage mode","Haha likh deta hai but andar thoda hurt hota hai","Ignore karta hai completely","DM karta hai aur honestly bolta hai bura laga"],"scores":[1,2,3,4],"category":"EQ"},
-      {"question":"Tera dost canteen mein akela baitha hai aur seedha nahi bol raha kya problem hai. Tu:","options":["\"Sab theek hai?\" poochh ke chhod deta hai","Uske paas baithta hai bina kuch poochhe","Baad mein poochhega, abhi disturb nahi karta","Apne kaam mein laga rehta hai"],"scores":[2,4,3,1],"category":"EQ"},
+      {"question":"Tera dost canteen mein akela baitha hai aur seedha nahi bol raha kya problem hai. Tu:","options":["\"Sab theek hai?\" poochh ke chhod deta hai","Uske paas baith ta hai bina kuch poochhe","Baad mein poochhega, abhi disturb nahi karta","Apne kaam mein laga rehta hai"],"scores":[2,4,3,1],"category":"EQ"},
       {"question":"Tu kisi pe bahut gusse mein hai. Tu:","options":["Turant bol deta hai, sab kuch bahar nikal deta hai","Kuch der chup rehta hai phir baat karta hai","Kabhi nahi bolta, andar hi andar jalta rehta hai","Memes bhejta hai passive aggressively"],"scores":[1,4,0,2],"category":"EQ"},
       {"question":"Koi tujhe compliment deta hai. Tu andar se:","options":["Genuinely khush hota hai","Sochta hai woh kuch chahta hoga","Awkward feel karta hai aur dismiss kar deta hai","Overanalyze karta hai ki real tha ya nahi"],"scores":[4,1,2,3],"category":"EQ"},
-      {"question":"Tera friend ek hi problem ke baare mein 5th time bol raha hai. Tu:","options":["Phir se poora sunta hai, usse matter karta hai","Sunn raha hai but andar se bore ho raha hai","Gently bolta hai \"yaar kuch karna padega ab\"","Phone dekh ke haan haan karta rehta hai"],"scores":[4,2,3,1],"category":"EQ"},
+      {"question":"Tera friend ek hi problem ke baare mein 5th time bol raha hai. Tu:","options":["Phir se poora sun ta hai, usse matter karta hai","Sun raha hai but andar se bore ho raha hai","Gently bolta hai \"yaar kuch karna padega ab\"","Phone dekh ke haan haan karta rehta hai"],"scores":[4,2,3,1],"category":"EQ"},
       {"question":"Tu kisi ke saath lad pada aur pata chala tu galat tha. Tu:","options":["Sorry bolta hai seedha, koi drama nahi","Sorry bolta hai but saath mein justify bhi karta hai","Sorry nahi bolta but behaviour se dikhata hai","Intezaar karta hai jab tak woh bhool jaaye"],"scores":[4,2,1,0],"category":"EQ"},
       {"question":"Presentation mein tera dost atak gaya. Tu:","options":["Andar se cringe karta hai but kuch nahi karta","Uski baat complete karne mein help karta hai subtly","Bad feel karta hai but baad mein poochhta hai kaisa raha","Wahan se nazar hata leta hai"],"scores":[1,4,3,0],"category":"EQ"},
       {"question":"Kisi cheez pe tu bahut excited hai but doston ko interest nahi. Tu:","options":["Chhod deta hai, akele enjoy nahi kar sakta","Phir bhi share karta hai, tujhe matter karta hai","Thoda hurt hota hai but adjust kar leta hai","Woh log nahi samjhe — aage badhta hai"],"scores":[1,3,2,4],"category":"EQ"},
@@ -969,7 +881,7 @@
       {"question":"Tu stressed hai but koi poochh raha hai \"sab theek?\" Tu:","options":["\"Haan haan sab sahi hai\" — full mask on","\"Thoda busy hoon\" — partial truth","Bata deta hai honestly agar trust karta hai","\"Baad mein baat karte hain\" — deflect mode"],"scores":[1,2,4,2],"category":"EQ"},
       {"question":"Tu aur tera dost dono same cheez ke liye apply karte ho. Woh select hota hai, tu nahi. Tu:","options":["Congrats bolta hai genuinely","Congrats bolta hai but andar jealousy hai","Kuch nahi bolta, avoid karta hai","\"Sab setting thi\" bolke dismiss karta hai"],"scores":[4,2,1,0],"category":"EQ"},
       {"question":"Koi tujhse apni personal problem share karta hai. Tera pehla impulse:","options":["Solution dena","Sunna aur samajhna","Relatable story share karna apni","Poochhna ki woh kya chahte hain — advice ya just vent"],"scores":[2,4,1,3],"category":"EQ"},
-      {"question":"Tera mood kharab hai. Dost mazak karta hai. Tu:","options":["Huns deta hai, adjust kar leta hai","Bata deta hai \"yaar abhi nahi\"","Chup ho jaata hai aur weird vibe create hoti hai","Irritate ho jaata hai aur wapas kaat-ta hai"],"scores":[3,4,1,0],"category":"EQ"},
+      {"question":"Tera mood kharab hai. Dost mazak karta hai. Tu:","options":["Huns deta hai, adjust kar leta hai","Bata deta hai \"yaar abhi nahi\"","Chup ho jaata hai aur weird vibe create hota hai","Irritate ho jaata hai aur wapas kaat-ta hai"],"scores":[3,4,1,0],"category":"EQ"},
       {"question":"Class mein koi bekaar answer deta hai. Sablog haste hain. Tu:","options":["Tujhe bhi hassi aati hai but kuch nahi karta","Tu bhi has deta hai","Uske baad usse normal treat karta hai","Try karta hai topic change karne ka"],"scores":[2,0,4,3],"category":"EQ"},
       {"question":"Tera dost tujhe bina reason bataye ignore karne laga. Tu:","options":["Tu bhi ignore karta hai wapas","Directly poochhta hai \"kya hua?\"","Doston se poochhta hai kya pata","Wait karta hai jab tak woh khud aaye"],"scores":[0,4,1,2],"category":"EQ"},
       {"question":"Kisi ne tujhe publicly embarrass kiya. Andar se tu:","options":["Bahut hurt hota hai but cool dikhata hai","Genuinely move on karta hai","Us cheez ko ghanton baad tak sochta rehta hai","Revenge plan banaata hai"],"scores":[2,4,1,0],"category":"EQ"},
@@ -978,38 +890,38 @@
       {"question":"Tera koi close nahi hai abhi life mein. Tu:","options":["It's fine, tu self-sufficient hai","Loneliness feel hota hai but deal kar leta hai","Bahut bura lagta hai","Actively koshish karta hai connections banana ki"],"scores":[3,2,1,4],"category":"EQ"},
       {"question":"Kal tera important exam hai aur dost bol raha hai \"chal bahar chalte hain.\" Tu:","options":["Chala jaata hai, ek raat se kya farak padta hai","Mana karta hai bina guilt ke","Jaata hai but puri raat padhne ki anxiety rehta hai","Half hour jaata hai phir wapas aa jaata hai"],"scores":[1,4,0,2],"category":"Decision"},
       {"question":"Do options hain — safe placement ya risky startup. Tu:","options":["Placement lo yaar, stability first","Startup, risk lo jab young ho","Sabse poochhega phir decide karega","Dono ke liye apply karo, baad mein sochenge"],"scores":[1,4,2,3],"category":"Decision"},
-      {"question":"Group mein koi decision nahi ho raha. Sablog tujhe dekh rahe hain. Tu:","options":["Ek option suggest karta hai confidently","\"Mujhe sab chalega\" bol deta hai","Vote karao — democracy best hai","Sabki baat sunn ke middle ground dhoondhta hai"],"scores":[4,0,3,2],"category":"Decision"},
+      {"question":"Group mein koi decision nahi ho raha. Sablog tujhe dekh rahe hain. Tu:","options":["Ek option suggest karta hai confidently","\"Mujhe sab chalega\" bol deta hai","Vote karao — democracy best hai","Sabki baat sun ke middle ground dhoondhta hai"],"scores":[4,0,3,2],"category":"Decision"},
       {"question":"Tu ek wrong decision le chuka hai. Abhi pata chala. Tu:","options":["Immediately course correct karta hai","Pata tha galat tha but ab kya","Khud ko blame karta hai ghanta bhar","Lesson note karta hai aur aage badhta hai"],"scores":[4,1,0,3],"category":"Decision"},
       {"question":"Kisi cheez mein 50-50 chance hai. Tu:","options":["Try karta hai, risk worth it lagta hai","Nahi karta, 50% failure too high","Depends on how bad the downside is","Coin flip karta hai literally"],"scores":[4,1,3,2],"category":"Decision"},
       {"question":"Canteen mein choose karna hai — tried and tested dish ya naya item. Tu:","options":["Same wala lega, why risk lunch","Naya try karega, worst case bad food","Dost kya le raha hai dekh ke decide karega","Dono le leta hai"],"scores":[1,4,0,2],"category":"Decision"},
       {"question":"Tu assignment last minute kar raha hai. Realise hota hai ek part missing hai. Tu:","options":["Incomplete submit karta hai, kuch toh hai","Raat bhar jaag ke complete karta hai","Dost se maang ke fill karta hai","Professor ko mail karta hai extension ke liye"],"scores":[1,4,0,3],"category":"Decision"},
-      {"question":"Kisi ne tujhse kuch maanga jiske liye tu tayyar nahi. Tu:","options":["Haan bol deta hai, baad mein tension","Seedha na bol deta hai","Itna ghoomata hai answer mein ki clear nahi hota","\"Main try karunga\" bol ke escape karta hai"],"scores":[0,4,1,2],"category":"Decision"},
+      {"question":"Kisi ne tujhse kuch maanga jiske liye tu tayyar nahi. Tu:","options":["Haan bol deta hai, baad mein tension","Seedha na bol deta hai","Itna ghoomata hai answer mein ki clear nahi hota","\"Main try karunga\" bolke escape karta hai"],"scores":[0,4,1,2],"category":"Decision"},
       {"question":"Ek cheez shuruaat mein interesting lagi but ab boring lag rahi hai. Tu:","options":["Chhod deta hai, time waste nahi karna","Finish karta hai, commitment matter karti hai","Postpone karta hai indefinitely","Kisi aur ko pass karta hai kaam"],"scores":[3,4,1,0],"category":"Decision"},
       {"question":"Kisi important kaam ke liye teri gut feeling kuch aur keh rahi hai. Tu:","options":["Gut follow karta hai hamesha","Logic dekh ke decide karta hai","Doston se poochhta hai","Overthink karta hai jab tak window close na ho jaaye"],"scores":[4,3,1,0],"category":"Decision"},
       {"question":"Plans change ho gaye last minute. Tu:","options":["Irritate hota hai but quickly adjust karta hai","Fine hai, tu flexible hai","Bahut upset hota hai","Future mein zyada plan nahi karta"],"scores":[3,4,0,2],"category":"Decision"},
-      {"question":"Exam mein ek question hai jiske baare mein tune padha nahi. Tu:","options":["Kuch bhi likh deta hai, attempt toh karo","Chhod deta hai, guess se marks nahi katenge","Adjacent topic se connect karke answer banataa hai","Dost ka paper dekhta hai"],"scores":[3,1,4,0],"category":"Decision"},
+      {"question":"Exam mein ek question hai jiske baare mein tune padha nahi. Tu:","options":["Kuch bhi likh deta hai, attempt toh karo","Chhod deta hai, guess se marks nahi katenge","Adjacent topic se connect karke answer banata hai","Dost ka paper dekhta hai"],"scores":[3,1,4,0],"category":"Decision"},
       {"question":"Bade decision mein tu trust karta hai:","options":["Apni gut","Research aur data","Kisi experienced insaan ki advice","Majority kya kar rahi hai"],"scores":[4,3,2,0],"category":"Decision"},
       {"question":"Ek cheez shuruaat kar ke beech mein realize kiya ye galat direction hai. Tu:","options":["Direction change karta hai turant","Complete karta hai, already invested","Pause karta hai aur sochta hai","Kisi aur ko bata ke decision delegate karta hai"],"scores":[4,1,3,0],"category":"Decision"},
       {"question":"Teri life mein ek important choice hai jisme koi sahi jawab nahi. Tu:","options":["Jo dil bole woh","Jo safe lage woh","Jo logically best outcome de","Jab tak force na ho, decide hi nahi karta"],"scores":[4,1,3,0],"category":"Decision"},
       {"question":"Tu ek decision le chuka hai. Sab log bol rahe hain tu galat hai. Tu:","options":["Reconsider karta hai, maybe they have a point","Apne decision pe stay karta hai confidently","Doubt mein aa jaata hai","Publicly agree karta hai but privately apni karta hai"],"scores":[3,4,1,2],"category":"Decision"},
-      {"question":"Tera phone kharaab ho gaya. Nayi phone lena hai. Tu:","options":["Research karta hai 2 hafte","Pehle option jo budget mein fit kare le leta hai","Dost se recommend karwata hai","YouTubers ka comparison video dekh ke decide karta hai"],"scores":[2,3,1,2],"category":"Decision"},
+      {"question":"Tera phone kharab ho gaya. Nayi phone lena hai. Tu:","options":["Research karta hai 2 hafte","Pehle option jo budget mein fit kare le leta hai","Dost se recommend karwata hai","YouTubers ka comparison video dekh ke decide karta hai"],"scores":[2,3,1,2],"category":"Decision"},
       {"question":"Life mein kuch bada karna chahta hai. Starting kahan se karein pata nahi. Tu:","options":["Shuru karta hai kisi bhi point se","Plan banata hai pehle","Wait karta hai \"sahi time\" ka","Kisi mentor ya senior se guidance leta hai"],"scores":[4,3,0,2],"category":"Decision"},
       {"question":"Tune kuch wrong kiya. Consequences saamne hain. Tu:","options":["Openly accept karta hai","Quietly fix karta hai bina bataye","Minimize karta hai situation ko","Blame shift karne ki koshish karta hai"],"scores":[4,3,1,0],"category":"Decision"},
       {"question":"Teri zindagi mein ek bada change aane wala hai. Tu feel karta hai:","options":["Excited","Nervous but ready","Scared","Avoidance mode on"],"scores":[4,3,1,0],"category":"Decision"},
       {"question":"Naye semester mein pehle din koi naya banda hai class mein. Tu:","options":["Khud jaake introduce karta hai","Wait karta hai woh aaye","Mutual dost ke through milega","Observe karta hai pehle, phir decide karta hai"],"scores":[4,1,2,3],"category":"Social"},
-      {"question":"Group hangout mein koi banda teri baat baar baar kaat raha hai. Tu:","options":["Apni baat khatam karta hai bina rukke","Ruk jaata hai, let him talk","Irritate hota hai andar se but kuch nahi karta","Baad mein ussse seedha bol deta hai"],"scores":[4,1,2,3],"category":"Social"},
+      {"question":"Group hangout mein koi banda teri baat baar baar kaat raha hai. Tu:","options":["Apni baat khatam karta hai bina rukke","Ruk jaata hai, let him talk","Irritate hota hai andar se but kuch nahi karta","Baad mein usse seedha bol deta hai"],"scores":[4,1,2,3],"category":"Social"},
       {"question":"Tu kaisa dost hai?","options":["Jo hamesha available hai","Jo bakwaas nahi karta, straight up honest hai","Jo sab ke saath fit ho jaata hai","Jo sirf apne kuch logon ke liye exist karta hai"],"scores":[3,4,2,1],"category":"Social"},
       {"question":"College fresher party mein tu:","options":["Dance floor pe sabse pehle","Corner mein apne log dhoondh raha hai","Sab se milta hai politely but limited energy hai","Thodi der mein excuse bana ke nikal jaata hai"],"scores":[4,1,2,0],"category":"Social"},
       {"question":"Tujhe koi pasand karne lage toh tu:","options":["Direct hota hai, bata deta hai","Hints deta hai aur dekhta hai woh samjhe ya nahi","Dost ke through message karwata hai","Wait karta hai perfect moment ka jo kabhi nahi aata"],"scores":[4,2,0,1],"category":"Social"},
       {"question":"Group mein conflict ho gaya. Tu:","options":["Mediator ban jaata hai","Side leta hai jo sahi lage","Dono se alag alag baat karta hai","Distance bana leta hai jab tak resolve na ho"],"scores":[4,3,2,0],"category":"Social"},
       {"question":"Tera close dost kisi bure insaan ke saath hang out karne laga. Tu:","options":["Seedha bolta hai \"yaar ye banda sahi nahi lag raha\"","Chup rehta hai, uski life uski choice","Subtle hints deta hai","Wait karta hai woh khud realize kare"],"scores":[4,1,2,3],"category":"Social"},
-      {"question":"Social media pe teri post pe koi bakwaas comment karta hai. Tu:","options":["Publicly reply karta hai confidently","Block/delete karta hai silently","Screenshot karta hai aur dosto ko bhejta hai","Ignore karta hai, not worth it"],"scores":[3,2,1,4],"category":"Social"},
-      {"question":"Tere doston ke do groups hain jinho ek saath milna nahi chahte. Tu:","options":["Unhe force karta hai milne ke liye","Dono ke saath alag alag time spend karta hai","Jo bada group hai usse choose karta hai","Awkwardly dono mein juggle karta rehta hai"],"scores":[0,4,1,2],"category":"Social"},
+      {"question":"Social media pe teri post pe koi bakwaas comment karta hai. Tu:","options":["Publicly reply karta hai confidently","Block/delete karta hai silently","Screenshot karta hai aur doston ko bhejta hai","Ignore karta hai, not worth it"],"scores":[3,2,1,4],"category":"Social"},
+      {"question":"Tere doston ke do groups hain jo ek saath milna nahi chahte. Tu:","options":["Unhe force karta hai milne ke liye","Dono ke saath alag alag time spend karta hai","Jo bada group hai usse choose karta hai","Awkwardly dono mein juggle karta rehta hai"],"scores":[0,4,1,2],"category":"Social"},
       {"question":"Koi teri burai kar raha hai tere peeth peeche. Pata chala. Tu:","options":["Seedha confront karta hai","Ignore karta hai, log log hain","Unse door rehta hai quietly","Aur logon ko bata ke drama banata hai"],"scores":[4,3,2,0],"category":"Social"},
-      {"question":"Tu kisi naye group mein hota hai. Conversation chal rahi hai. Tu:","options":["Opinions deta hai freely","Observe karta hai pehle, phir contribute karta hai","Sirf tab bolta hai jab directly poocha jaaye","Apne phone pe busy rehta hai mostly"],"scores":[4,3,1,0],"category":"Social"},
+      {"question":"Tu kisi naye group mein hota hai. Conversation chal raha hai. Tu:","options":["Opinions deta hai freely","Observe karta hai pehle, phir contribute karta hai","Sirf tab bolta hai jab directly poocha jaaye","Apne phone pe busy rehta hai mostly"],"scores":[4,3,1,0],"category":"Social"},
       {"question":"Tera dost tujhse zyada successful ho gaya. Tu:","options":["Usse dekh ke aur mehnat karne ka mann karta hai","Thoda jealous feel hota hai secretly","Proud feel karta hai genuinely","Compare karne lagta hai khud ko"],"scores":[4,2,4,1],"category":"Social"},
       {"question":"Ek banda hai jo clearly tujhe pasand nahi karta. Tu usse:","options":["Avoid karta hai completely","Professional rehta hai, koi drama nahi","Usse bhi nahi karta pasand publicly","Samajhne ki koshish karta hai ki kya problem hai"],"scores":[1,4,0,3],"category":"Social"},
-      {"question":"Tujhe kisi ki help chahiye. Tu:","options":["Seedha bol deta hai bina hesitate kiye","Hints deta hai aur dekhta hai woh samjhe ya nahi","Khud karta hai chahe time lage","Bahut zarurat ho tabhi maangta hai"],"scores":[4,1,2,3],"category":"Social"},
+      {"question":"Tujhe kisi ki help chahiye. Tu:","options":["Seedha bol deta hai bina hesitate kiye","Hints deta hai aur dekhta hai woh samjhe ya nahi","Khud karta hai chahe time lage","Bahut zarurat ho tab hi maangta hai"],"scores":[4,1,2,3],"category":"Social"},
       {"question":"Group photo mein tu hota hai:","options":["Front mein, confidently","Side mein, it's fine","Peechhe chhupta hai","Jo jagah mile le leta hai"],"scores":[4,2,0,3],"category":"Social"},
       {"question":"Kisi ne tujhe bura feel karaaya by mistake. Tu:","options":["Bol deta hai immediately","Chhod deta hai, unintentional tha","Andar rakhta hai but yaad rehta hai","Passive aggressively treat karta hai"],"scores":[4,3,1,0],"category":"Social"},
       {"question":"Tu apne doston ke saath sabse comfortable kab hota hai?","options":["Jab sirf 1-2 log hon","Jab bada group ho aur energy high ho","Jab koi plan nahi ho, bas timepass","Jab sab apne kaam mein busy ho, tu bhi apne mein"],"scores":[3,4,2,1],"category":"Social"},
@@ -1042,7 +954,7 @@
       {"question":"Tera \"public wala tu\" aur \"private wala tu\" mein difference hai?","options":["Bahut zyada","Thoda","Nahi ke barabar","Tune kabhi socha hi nahi"],"scores":[1,3,4,0],"category":"Awareness"},
       {"question":"Tune apne life mein ek pattern notice kiya hai jo repeat hota hai. Woh hai:","options":["Jo kaam important hota hai usse postpone karna","Log use karte hain aur tu let karta hai","Kuch achha hota hai toh tu khud hi kharaab karta hai","Tune aisa koi pattern notice nahi kiya"],"scores":[1,2,1,0],"category":"Awareness"},
       {"question":"Jab tu galat hota hai:","options":["Pata chal jaata hai khud ko turant","Baad mein realize hota hai","Tab pata chalta hai jab koi bolta hai","Manta hi nahi"],"scores":[4,3,1,0],"category":"Awareness"},
-      {"question":"Tu apne baare mein log kya sochhte hain iske baare mein:","options":["Zyada sochta hai aur anxiety hoti hai","Thoda dhyan deta hai but overthink nahi karta","Genuinely care nahi karta","Actively manage karta hai apna image"],"scores":[0,3,4,1],"category":"Awareness"},
+      {"question":"Tu apne baare mein log kya sochhte hain iske baare mein:","options":["Zyada sochta hai aur anxiety hota hai","Thoda dhyan deta hai but overthink nahi karta","Genuinely care nahi karta","Actively manage karta hai apna image"],"scores":[0,3,4,1],"category":"Awareness"},
       {"question":"Teri inner voice generally:","options":["Encouraging hoti hai","Bahut critical hoti hai","Depends on situation","Tune kabhi dhyan nahi diya"],"scores":[4,0,3,1],"category":"Awareness"},
       {"question":"Jab tu akela hota hai, tu kya sochta hai mostly?","options":["Future plans aur goals","Past ki galtiyaan","Random thoughts, koi pattern nahi","Tune kabhi notice nahi kiya"],"scores":[4,0,2,1],"category":"Awareness"},
       {"question":"Jab life mein sab achha chal raha hota hai, tu:","options":["Enjoy karta hai moment ko","Wait karta hai kab kharaab hoga","Aur mehnat karta hai capitalize karne ke liye","Slightly suspicious hota hai"],"scores":[4,0,3,1],"category":"Awareness"},
@@ -1051,7 +963,7 @@
       {"question":"Tu apni life mein kitna self-aware hai honestly?","options":["Bahut — sab jaanta hai apne baare mein","Average — kuch jaanta hai, kuch nahi","Kam — logon ne bataya tab pata chala","Nahi jaanta, ye quiz batayega"],"scores":[4,3,1,0],"category":"Awareness"},
       {"question":"Ek cheez jo tu publicly claim karta hai but privately opposite hai:","options":["\"Mujhe kisi ki parwah nahi\"","\"Main bahut disciplined hoon\"","\"Main kabhi jealous nahi hota\"","Tune honestly kabhi aisa contradiction notice nahi kiya"],"scores":[1,1,1,4],"category":"Awareness"},
       {"question":"Tu apni progress se:","options":["Satisfied hai mostly","Never satisfied, hamesha aur chahiye","Disappointed hai khud se","Neutral hai, compare nahi karta"],"scores":[4,2,0,3],"category":"Awareness"},
-      {"question":"3 saal pehle wale tu aur aaj ke tu mein:","options":["Bahut growth","Thodi growth","Almost same hai","Regressed in some ways"],"scores":[4,3,1,0],"category":"Awareness"},
+      {"question":"3 saal pehle wale tu aur aaj ke tu mein:","options":["Bahut growth","Thoda growth","Almost same hai","Regressed in some ways"],"scores":[4,3,1,0],"category":"Awareness"},
       {"question":"Jab koi tujhe accurately describe karta hai, tu feel karta hai:","options":["Seen","Slightly uncomfortable","Surprised ki unhone notice kiya","Defensive"],"scores":[4,2,3,0],"category":"Awareness"},
       {"question":"Teri life mein sabse bada unresolved thing hai:","options":["Tu jaanta hai exactly kya hai","Vague idea hai","Nahi jaanta but jaanna chahta hai","Sochna hi nahi chahta"],"scores":[4,2,3,0],"category":"Awareness"},
       {"question":"Tu apni galti mante time:","options":["Full responsibility leta hai","Sorry bolta hai but adds \"but...\"","Bahut time lagta hai acknowledge karne mein","Only jab koi proof ho"],"scores":[4,1,0,0],"category":"Awareness"},
@@ -1090,7 +1002,7 @@
         p.className = 'particle';
         p.style.left  = Math.random() * 100 + '%';
         p.style.top   = Math.random() * 100 + '%';
-        p.style.setProperty('--dur',   (3 + Math.random() * 5) + 's');
+        p.style.setProperty('--dur', (3 + Math.random() * 5) + 's');
         p.style.setProperty('--delay', (Math.random() * 6) + 's');
         if (i % 5 === 0) p.style.background = '#00F5FF';
         container.appendChild(p);
@@ -1144,10 +1056,8 @@
       state.answers = [];
       state.scores = { EQ: 0, Decision: 0, Social: 0, Ambition: 0, Awareness: 0 };
       
-      // Get 15 random questions
       state.quizQuestions = getRandomQuestions(15);
       
-      // Calculate max per category based on selected questions
       const catCount = { EQ: 0, Decision: 0, Social: 0, Ambition: 0, Awareness: 0 };
       state.quizQuestions.forEach(q => catCount[q.category]++);
       state.maxPerCategory = {};
@@ -1383,6 +1293,5 @@
       return str.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
     }
   </script>
-
 </body>
 </html>
