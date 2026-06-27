@@ -1,0 +1,1007 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <meta name="description" content="AURA — A personality audit game built for Indian college students. 100 questions. One score. Find out who you actually are." />
+  <title>AURA — Personality Audit</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ============================================================
+       DESIGN TOKENS
+    ============================================================ */
+    :root {
+      --bg:          #0a0a0a;
+      --bg-card:     #111111;
+      --bg-card-2:   #181818;
+      --accent:      #7C3AED;
+      --accent-glow: rgba(124, 58, 237, 0.35);
+      --accent-soft: rgba(124, 58, 237, 0.12);
+      --cyan:        #00F5FF;
+      --text:        #FFFFFF;
+      --text-muted:  #888888;
+      --text-dim:    #444444;
+      --border:      rgba(255,255,255,0.06);
+      --radius:      16px;
+      --radius-sm:   10px;
+      --transition:  300ms cubic-bezier(0.4, 0, 0.2, 1);
+      --max-w:       430px;
+    }
+
+    /* ============================================================
+       RESET & BASE
+    ============================================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      height: 100%;
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', system-ui, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* ============================================================
+       APP WRAPPER
+    ============================================================ */
+    #app {
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px 20px;
+      position: relative;
+    }
+
+    /* ============================================================
+       ANIMATED BACKGROUND MESH
+    ============================================================ */
+    .bg-mesh {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .bg-mesh::before {
+      content: '';
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(124,58,237,0.18) 0%, transparent 70%);
+      top: -200px;
+      left: 50%;
+      transform: translateX(-50%);
+      animation: meshFloat 8s ease-in-out infinite alternate;
+    }
+
+    .bg-mesh::after {
+      content: '';
+      position: absolute;
+      width: 400px;
+      height: 400px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0,245,255,0.08) 0%, transparent 70%);
+      bottom: -100px;
+      right: -100px;
+      animation: meshFloat 10s ease-in-out infinite alternate-reverse;
+    }
+
+    @keyframes meshFloat {
+      from { transform: translateX(-50%) translateY(0px) scale(1); }
+      to   { transform: translateX(-50%) translateY(-40px) scale(1.08); }
+    }
+
+    /* Particle dots */
+    .particles {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .particle {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: var(--accent);
+      border-radius: 50%;
+      opacity: 0;
+      animation: particleFade var(--dur, 4s) ease-in-out infinite;
+      animation-delay: var(--delay, 0s);
+    }
+
+    @keyframes particleFade {
+      0%, 100% { opacity: 0; transform: translateY(0); }
+      50%       { opacity: 0.6; transform: translateY(-20px); }
+    }
+
+    /* ============================================================
+       SCREEN SYSTEM — screens are shown/hidden via JS
+    ============================================================ */
+    .screen {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: var(--max-w);
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+
+      /* entrance animation state */
+      opacity: 0;
+      transform: translateY(24px);
+    }
+
+    .screen.active {
+      display: flex;
+      animation: screenIn var(--transition) forwards;
+    }
+
+    .screen.exit {
+      animation: screenOut var(--transition) forwards;
+    }
+
+    @keyframes screenIn {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes screenOut {
+      from { opacity: 1; transform: translateY(0); }
+      to   { opacity: 0; transform: translateY(-24px); }
+    }
+
+    /* ============================================================
+       SCREEN 1 — INTRO
+    ============================================================ */
+    #screen-intro {
+      text-align: center;
+      gap: 32px;
+      padding: 40px 0;
+    }
+
+    .logo-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .logo-icon {
+      width: 80px;
+      height: 80px;
+      border-radius: 24px;
+      background: linear-gradient(135deg, #7C3AED, #00F5FF);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 40px var(--accent-glow), 0 0 80px rgba(0,245,255,0.08);
+      animation: logoPulse 3s ease-in-out infinite;
+    }
+
+    @keyframes logoPulse {
+      0%, 100% { box-shadow: 0 0 40px var(--accent-glow), 0 0 80px rgba(0,245,255,0.08); }
+      50%       { box-shadow: 0 0 60px rgba(124,58,237,0.5), 0 0 100px rgba(0,245,255,0.12); }
+    }
+
+    .logo-icon svg {
+      width: 44px;
+      height: 44px;
+    }
+
+    .logo-title {
+      font-size: 52px;
+      font-weight: 900;
+      letter-spacing: -2px;
+      background: linear-gradient(135deg, #fff 30%, #7C3AED 70%, #00F5FF);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1;
+    }
+
+    .logo-sub {
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .tagline {
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.4;
+      max-width: 280px;
+    }
+
+    .tagline span {
+      background: linear-gradient(90deg, #7C3AED, #00F5FF);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .meta-row {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      color: var(--text-muted);
+      font-size: 13px;
+    }
+
+    .meta-dot {
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--text-dim);
+    }
+
+    /* ============================================================
+       SCREEN 2 — NAME INPUT
+    ============================================================ */
+    #screen-name {
+      gap: 36px;
+      padding: 20px 0;
+      width: 100%;
+    }
+
+    .screen-header {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .screen-header h2 {
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      line-height: 1.2;
+    }
+
+    .screen-header p {
+      font-size: 15px;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    .input-group {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      width: 100%;
+    }
+
+    .input-label {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .name-input {
+      width: 100%;
+      background: var(--bg-card);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 16px 20px;
+      font-size: 18px;
+      font-weight: 600;
+      font-family: inherit;
+      color: var(--text);
+      outline: none;
+      transition: border-color var(--transition), box-shadow var(--transition);
+      caret-color: var(--accent);
+    }
+
+    .name-input::placeholder {
+      color: var(--text-dim);
+      font-weight: 400;
+    }
+
+    .name-input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-soft);
+    }
+
+    /* ============================================================
+       SCREEN 3 — QUESTION
+    ============================================================ */
+    #screen-question {
+      gap: 28px;
+      padding: 16px 0 24px;
+      width: 100%;
+    }
+
+    /* Progress bar */
+    .progress-header {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .progress-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .progress-label {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .progress-count {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .progress-track {
+      width: 100%;
+      height: 4px;
+      background: var(--bg-card-2);
+      border-radius: 100px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #7C3AED, #00F5FF);
+      border-radius: 100px;
+      width: 0%;
+      transition: width 400ms cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 0 8px var(--accent-glow);
+    }
+
+    /* Category badge */
+    .category-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--accent-soft);
+      border: 1px solid rgba(124,58,237,0.25);
+      border-radius: 100px;
+      padding: 4px 12px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--accent);
+      width: fit-content;
+    }
+
+    .category-badge::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 6px var(--accent);
+    }
+
+    /* Question card */
+    .question-card {
+      width: 100%;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px 24px;
+    }
+
+    .question-number {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: 14px;
+    }
+
+    .question-text {
+      font-size: 19px;
+      font-weight: 600;
+      line-height: 1.5;
+      color: var(--text);
+    }
+
+    /* Options */
+    .options-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      width: 100%;
+    }
+
+    .option-btn {
+      width: 100%;
+      background: var(--bg-card);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      cursor: pointer;
+      transition:
+        background var(--transition),
+        border-color var(--transition),
+        transform var(--transition),
+        box-shadow var(--transition);
+      text-align: left;
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+    }
+
+    .option-btn:hover:not(:disabled) {
+      background: var(--accent-soft);
+      border-color: rgba(124,58,237,0.4);
+      transform: translateX(4px);
+    }
+
+    .option-btn:active:not(:disabled) {
+      transform: scale(0.98);
+    }
+
+    /* Selected state — triggered by JS after pick */
+    .option-btn.selected {
+      background: var(--accent-soft);
+      border-color: var(--accent);
+      box-shadow: 0 0 0 2px var(--accent-glow);
+    }
+
+    /* Disabled state while animating */
+    .option-btn:disabled {
+      cursor: default;
+    }
+
+    .option-label {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      background: var(--bg-card-2);
+      border: 1.5px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      color: var(--text-muted);
+      flex-shrink: 0;
+      transition: background var(--transition), border-color var(--transition), color var(--transition);
+    }
+
+    .option-btn.selected .option-label {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+    }
+
+    .option-text {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--text);
+      line-height: 1.4;
+    }
+
+    /* ============================================================
+       SHARED BUTTON STYLES
+    ============================================================ */
+    .btn-primary {
+      width: 100%;
+      padding: 17px 32px;
+      border: none;
+      border-radius: var(--radius-sm);
+      font-family: inherit;
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+      color: #fff;
+      background: linear-gradient(135deg, #7C3AED 0%, #5B21B6 100%);
+      cursor: pointer;
+      transition: opacity var(--transition), transform var(--transition), box-shadow var(--transition);
+      box-shadow: 0 4px 24px var(--accent-glow);
+      position: relative;
+      overflow: hidden;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .btn-primary::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.08) 0%, transparent 60%);
+    }
+
+    .btn-primary:hover {
+      opacity: 0.92;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px var(--accent-glow);
+    }
+
+    .btn-primary:active {
+      transform: translateY(0) scale(0.98);
+    }
+
+    .btn-primary:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    /* ============================================================
+       FOOTER HINT
+    ============================================================ */
+    .hint-text {
+      font-size: 12px;
+      color: var(--text-dim);
+      text-align: center;
+      line-height: 1.6;
+    }
+
+    /* ============================================================
+       DIVIDER
+    ============================================================ */
+    .divider {
+      width: 40px;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--cyan));
+      border-radius: 100px;
+    }
+
+    /* ============================================================
+       RESPONSIVE — ensure desktop centering looks good too
+    ============================================================ */
+    @media (min-width: 500px) {
+      #app {
+        padding: 32px 24px;
+      }
+    }
+
+    /* ============================================================
+       UTILITY
+    ============================================================ */
+    .hidden { display: none !important; }
+    .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); }
+  </style>
+</head>
+
+<body>
+
+  <!-- ============================================================
+       ANIMATED BACKGROUND
+  ============================================================ -->
+  <div class="bg-mesh" aria-hidden="true"></div>
+  <div class="particles" id="particles" aria-hidden="true"></div>
+
+  <!-- ============================================================
+       APP ROOT
+  ============================================================ -->
+  <main id="app" role="main">
+
+    <!-- ==========================================
+         SCREEN 1: INTRO
+    ========================================== -->
+    <section id="screen-intro" class="screen active" aria-label="Welcome screen">
+
+      <div class="logo-wrap">
+        <!-- Logo icon -->
+        <div class="logo-icon" aria-hidden="true">
+          <svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M22 4L38 34H6L22 4Z" stroke="#fff" stroke-width="2.5" stroke-linejoin="round" fill="none"/>
+            <circle cx="22" cy="26" r="4" fill="#fff" opacity="0.9"/>
+            <path d="M22 4L22 22" stroke="#fff" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
+          </svg>
+        </div>
+
+        <h1 class="logo-title">AURA</h1>
+        <p class="logo-sub">Personality Audit</p>
+      </div>
+
+      <div class="divider"></div>
+
+      <p class="tagline">
+        Find out who you <span>actually are.</span>
+      </p>
+
+      <div class="meta-row" aria-label="Quiz details">
+        <span>100 questions</span>
+        <div class="meta-dot"></div>
+        <span>5 dimensions</span>
+        <div class="meta-dot"></div>
+        <span>~10 min</span>
+      </div>
+
+      <button
+        id="btn-start"
+        class="btn-primary"
+        onclick="goToName()"
+        aria-label="Start the AURA quiz"
+      >
+        Start your AURA ✦
+      </button>
+
+      <p class="hint-text">No account needed · Results are private</p>
+
+    </section>
+
+
+    <!-- ==========================================
+         SCREEN 2: NAME INPUT
+    ========================================== -->
+    <section id="screen-name" class="screen" aria-label="Name entry screen">
+
+      <div class="screen-header">
+        <h2>What do we call<br/>you? 👋</h2>
+        <p>We'll personalise your results with your name.</p>
+      </div>
+
+      <div class="input-group">
+        <label class="input-label" for="user-name-input">Your name</label>
+        <input
+          id="user-name-input"
+          class="name-input"
+          type="text"
+          placeholder="e.g. Aashay"
+          maxlength="40"
+          autocomplete="given-name"
+          autocapitalize="words"
+          spellcheck="false"
+          aria-label="Enter your first name"
+          oninput="validateName()"
+          onkeydown="handleNameKey(event)"
+        />
+      </div>
+
+      <button
+        id="btn-continue"
+        class="btn-primary"
+        onclick="goToQuestions()"
+        disabled
+        aria-label="Continue to the quiz"
+      >
+        Let's go →
+      </button>
+
+      <p class="hint-text">Your name is never stored or sent anywhere.</p>
+
+    </section>
+
+
+    <!-- ==========================================
+         SCREEN 3: QUESTION
+    ========================================== -->
+    <section id="screen-question" class="screen" aria-label="Question screen">
+
+      <!-- Progress -->
+      <div class="progress-header">
+        <div class="progress-meta">
+          <span class="progress-label" id="q-category">Category</span>
+          <span class="progress-count" id="q-count" aria-live="polite">1 / 3</span>
+        </div>
+        <div class="progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="progress-bar-wrap">
+          <div class="progress-fill" id="progress-fill"></div>
+        </div>
+      </div>
+
+      <!-- Category badge -->
+      <div class="category-badge" id="q-badge" aria-hidden="true">EQ</div>
+
+      <!-- Question card -->
+      <div class="question-card">
+        <p class="question-number" id="q-number" aria-hidden="true">Question 01</p>
+        <p class="question-text" id="q-text" aria-live="assertive"></p>
+      </div>
+
+      <!-- Answer options -->
+      <div class="options-list" id="options-list" role="group" aria-label="Answer options">
+        <!-- Rendered by JS -->
+      </div>
+
+    </section>
+
+  </main><!-- /#app -->
+
+
+  <!-- ============================================================
+       VANILLA JS — PHASE 1 SHELL
+  ============================================================ -->
+  <script>
+    /* ============================================================
+       STATE
+    ============================================================ */
+    const state = {
+      userName: '',
+      currentQ: 0,
+      answers: [],   // { category, score } per question
+    };
+
+    /* ============================================================
+       QUESTIONS ARRAY
+       ⚠️  PLACEHOLDER — Replace with real 100 questions.
+       Each object shape:
+       {
+         question : String,
+         options  : [String, String, String, String],   // A B C D
+         scores   : [Number, Number, Number, Number],   // 0-4 each
+         category : "EQ" | "Decision" | "Social" | "Ambition" | "Awareness"
+       }
+    ============================================================ */
+    const questions = [
+      {
+        question: "Your group has to pick a restaurant. Everyone's texting different options and no one's deciding. You:",
+        options: [
+          "Quietly wait — someone will figure it out eventually",
+          "Make a quick poll in the group and close it in 10 mins",
+          "Suggest one place with full confidence and commit",
+          "Check everyone's vibe before saying anything"
+        ],
+        scores: [0, 3, 4, 2],
+        category: "Decision"
+      },
+      {
+        question: "Your friend posts something online that you know isn't true. You:",
+        options: [
+          "DM them privately so they don't feel embarrassed",
+          "Comment the correct info calmly and move on",
+          "Let it go — it's not your business",
+          "Screenshot it and cringe with another friend"
+        ],
+        scores: [4, 3, 0, 1],
+        category: "EQ"
+      },
+      {
+        question: "It's the first week of college and you don't know anyone in the room. You:",
+        options: [
+          "Sit near someone who looks friendly and introduce yourself",
+          "Wait for someone to talk to you first",
+          "Take out your phone until it feels less awkward",
+          "Join whatever group looks most interesting"
+        ],
+        scores: [3, 1, 0, 4],
+        category: "Social"
+      }
+    ];
+    /* ============================================================
+       END QUESTIONS ARRAY
+    ============================================================ */
+
+
+    /* ============================================================
+       PARTICLES — decorative background dots
+    ============================================================ */
+    (function spawnParticles() {
+      const container = document.getElementById('particles');
+      const count = 18;
+      for (let i = 0; i < count; i++) {
+        const p = document.createElement('div');
+        p.className = 'particle';
+        p.style.left  = Math.random() * 100 + '%';
+        p.style.top   = Math.random() * 100 + '%';
+        p.style.setProperty('--dur',   (3 + Math.random() * 5) + 's');
+        p.style.setProperty('--delay', (Math.random() * 6) + 's');
+        // alternate a few particles to cyan
+        if (i % 5 === 0) p.style.background = '#00F5FF';
+        container.appendChild(p);
+      }
+    })();
+
+
+    /* ============================================================
+       SCREEN NAVIGATION
+    ============================================================ */
+    function showScreen(nextId) {
+      const current = document.querySelector('.screen.active');
+      const next    = document.getElementById(nextId);
+      if (!next || current === next) return;
+
+      // Exit animation on current
+      if (current) {
+        current.classList.add('exit');
+        current.addEventListener('animationend', () => {
+          current.classList.remove('active', 'exit');
+          current.style.display = 'none';
+        }, { once: true });
+      }
+
+      // Slight delay so exit plays first
+      setTimeout(() => {
+        next.style.display = 'flex';
+        // Force reflow
+        void next.offsetWidth;
+        next.classList.add('active');
+      }, 160);
+    }
+
+
+    /* ============================================================
+       SCREEN 1 → SCREEN 2  (Intro → Name)
+    ============================================================ */
+    function goToName() {
+      showScreen('screen-name');
+      setTimeout(() => {
+        document.getElementById('user-name-input').focus();
+      }, 400);
+    }
+
+
+    /* ============================================================
+       NAME VALIDATION
+    ============================================================ */
+    function validateName() {
+      const val = document.getElementById('user-name-input').value.trim();
+      document.getElementById('btn-continue').disabled = val.length < 1;
+    }
+
+    function handleNameKey(e) {
+      if (e.key === 'Enter') {
+        const val = document.getElementById('user-name-input').value.trim();
+        if (val.length > 0) goToQuestions();
+      }
+    }
+
+
+    /* ============================================================
+       SCREEN 2 → SCREEN 3  (Name → Questions)
+    ============================================================ */
+    function goToQuestions() {
+      const val = document.getElementById('user-name-input').value.trim();
+      if (!val) return;
+      state.userName = val;
+      state.currentQ = 0;
+      state.answers  = [];
+      renderQuestion(0);
+      showScreen('screen-question');
+    }
+
+
+    /* ============================================================
+       QUESTION RENDERER
+    ============================================================ */
+    function renderQuestion(index) {
+      const q = questions[index];
+      if (!q) return;
+
+      const total = questions.length;
+      const pct   = Math.round((index / total) * 100);
+
+      // Progress bar
+      document.getElementById('progress-fill').style.width = pct + '%';
+      document.getElementById('progress-bar-wrap').setAttribute('aria-valuenow', pct);
+
+      // Labels
+      document.getElementById('q-count').textContent    = `${index + 1} / ${total}`;
+      document.getElementById('q-number').textContent   = 'Question ' + String(index + 1).padStart(2, '0');
+      document.getElementById('q-category').textContent = q.category;
+      document.getElementById('q-badge').textContent    = q.category;
+
+      // Question text — animate swap
+      const qText = document.getElementById('q-text');
+      qText.style.opacity = '0';
+      setTimeout(() => {
+        qText.textContent  = q.question;
+        qText.style.transition = 'opacity 250ms ease';
+        qText.style.opacity = '1';
+      }, 100);
+
+      // Options
+      renderOptions(q, index);
+    }
+
+    function renderOptions(q, qIndex) {
+      const list    = document.getElementById('options-list');
+      const labels  = ['A', 'B', 'C', 'D'];
+      list.innerHTML = '';
+
+      q.options.forEach((optText, i) => {
+        const btn = document.createElement('button');
+        btn.className = 'option-btn';
+        btn.id        = `option-${i}`;
+        btn.setAttribute('aria-label', `Option ${labels[i]}: ${optText}`);
+        btn.innerHTML = `
+          <span class="option-label" aria-hidden="true">${labels[i]}</span>
+          <span class="option-text">${optText}</span>
+        `;
+
+        btn.addEventListener('click', () => pickOption(i, q, qIndex));
+        list.appendChild(btn);
+
+        // Staggered entrance
+        btn.style.opacity   = '0';
+        btn.style.transform = 'translateX(-12px)';
+        btn.style.transition = `opacity 250ms ease ${i * 60}ms, transform 250ms ease ${i * 60}ms`;
+        requestAnimationFrame(() => {
+          btn.style.opacity   = '1';
+          btn.style.transform = 'translateX(0)';
+        });
+      });
+    }
+
+
+    /* ============================================================
+       HANDLE OPTION PICK
+    ============================================================ */
+    function pickOption(optionIndex, q, qIndex) {
+      // Disable all options immediately
+      const allBtns = document.querySelectorAll('.option-btn');
+      allBtns.forEach(b => b.disabled = true);
+
+      // Highlight selected
+      allBtns[optionIndex].classList.add('selected');
+
+      // Store answer
+      state.answers.push({
+        category: q.category,
+        score:    q.scores[optionIndex]
+      });
+
+      // Auto-advance after 350ms
+      setTimeout(() => {
+        const next = qIndex + 1;
+        if (next < questions.length) {
+          state.currentQ = next;
+          renderQuestion(next);
+        } else {
+          // All questions done — Phase 2 will handle scoring + results
+          // For now, show a placeholder finish state
+          showFinishPlaceholder();
+        }
+      }, 350);
+    }
+
+
+    /* ============================================================
+       TEMPORARY FINISH PLACEHOLDER
+       (Will be replaced in Phase 2 with full results screen)
+    ============================================================ */
+    function showFinishPlaceholder() {
+      const app = document.getElementById('app');
+      const placeholder = document.createElement('section');
+      placeholder.className = 'screen active';
+      placeholder.style.cssText = 'display:flex; flex-direction:column; align-items:center; gap:24px; text-align:center;';
+      placeholder.innerHTML = `
+        <div class="logo-icon" style="width:64px;height:64px;border-radius:20px;">
+          <svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" width="36" height="36">
+            <path d="M22 4L38 34H6L22 4Z" stroke="#fff" stroke-width="2.5" stroke-linejoin="round" fill="none"/>
+            <circle cx="22" cy="26" r="4" fill="#fff" opacity="0.9"/>
+          </svg>
+        </div>
+        <div>
+          <h2 style="font-size:26px;font-weight:800;margin-bottom:8px;">Nice work, ${escapeHtml(state.userName)}! ✦</h2>
+          <p style="color:var(--text-muted);font-size:15px;line-height:1.5;">Scoring engine coming in Phase 2.<br/>Your answers have been captured.</p>
+        </div>
+        <button class="btn-primary" onclick="location.reload()" style="max-width:320px;">Retake Quiz</button>
+      `;
+
+      // Hide current screen
+      document.getElementById('screen-question').classList.remove('active');
+      document.getElementById('screen-question').style.display = 'none';
+      app.appendChild(placeholder);
+    }
+
+    /* Simple HTML escape to prevent XSS */
+    function escapeHtml(str) {
+      return str.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    }
+
+  </script>
+
+</body>
+</html>
