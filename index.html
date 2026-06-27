@@ -135,8 +135,6 @@
       flex-direction: column;
       align-items: center;
       gap: 0;
-
-      /* entrance animation state */
       opacity: 0;
       transform: translateY(24px);
     }
@@ -325,7 +323,6 @@
       width: 100%;
     }
 
-    /* Progress bar */
     .progress-header {
       width: 100%;
       display: flex;
@@ -370,7 +367,6 @@
       box-shadow: 0 0 8px var(--accent-glow);
     }
 
-    /* Category badge */
     .category-badge {
       display: inline-flex;
       align-items: center;
@@ -396,7 +392,6 @@
       box-shadow: 0 0 6px var(--accent);
     }
 
-    /* Question card */
     .question-card {
       width: 100%;
       background: var(--bg-card);
@@ -421,7 +416,6 @@
       color: var(--text);
     }
 
-    /* Options */
     .options-list {
       display: flex;
       flex-direction: column;
@@ -459,14 +453,12 @@
       transform: scale(0.98);
     }
 
-    /* Selected state — triggered by JS after pick */
     .option-btn.selected {
       background: var(--accent-soft);
       border-color: var(--accent);
       box-shadow: 0 0 0 2px var(--accent-glow);
     }
 
-    /* Disabled state while animating */
     .option-btn:disabled {
       cursor: default;
     }
@@ -499,6 +491,203 @@
       font-weight: 500;
       color: var(--text);
       line-height: 1.4;
+    }
+
+    /* ============================================================
+       SCREEN 4 — RESULTS
+    ============================================================ */
+    #screen-results {
+      gap: 28px;
+      padding: 16px 0;
+      width: 100%;
+    }
+
+    .aura-score-wrap {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .aura-score-label {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .aura-score {
+      font-size: 72px;
+      font-weight: 900;
+      line-height: 1;
+      background: linear-gradient(135deg, #fff 30%, #7C3AED 70%, #00F5FF);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .personality-card {
+      width: 100%;
+      background: linear-gradient(135deg, rgba(124,58,237,0.15) 0%, rgba(0,245,255,0.05) 100%);
+      border: 1px solid rgba(124,58,237,0.3);
+      border-radius: var(--radius);
+      padding: 24px 20px;
+      text-align: center;
+    }
+
+    .personality-title {
+      font-size: 24px;
+      font-weight: 800;
+      margin-bottom: 8px;
+      color: #fff;
+    }
+
+    .personality-desc {
+      font-size: 15px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    .dimensions-card {
+      width: 100%;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+    }
+
+    .dimensions-title {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+
+    .dimension-row {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    .dimension-row:last-child {
+      margin-bottom: 0;
+    }
+
+    .dimension-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .dimension-name {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .dimension-value {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .dimension-track {
+      width: 100%;
+      height: 8px;
+      background: var(--bg-card-2);
+      border-radius: 100px;
+      overflow: hidden;
+    }
+
+    .dimension-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #7C3AED, #00F5FF);
+      border-radius: 100px;
+      width: 0%;
+      transition: width 1000ms cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .insights-card {
+      width: 100%;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+    }
+
+    .insight-item {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .insight-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .insight-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+
+    .insight-icon.strength {
+      background: rgba(34, 197, 94, 0.15);
+    }
+
+    .insight-icon.weakness {
+      background: rgba(239, 68, 68, 0.15);
+    }
+
+    .insight-content {
+      flex: 1;
+    }
+
+    .insight-title {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .insight-text {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    .btn-row {
+      width: 100%;
+      display: flex;
+      gap: 12px;
+    }
+
+    .btn-secondary {
+      flex: 1;
+      padding: 17px 24px;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-sm);
+      font-family: inherit;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text);
+      background: transparent;
+      cursor: pointer;
+      transition: opacity var(--transition), transform var(--transition);
+    }
+
+    .btn-secondary:hover {
+      opacity: 0.9;
+      transform: translateY(-1px);
     }
 
     /* ============================================================
@@ -567,7 +756,7 @@
     }
 
     /* ============================================================
-       RESPONSIVE — ensure desktop centering looks good too
+       RESPONSIVE
     ============================================================ */
     @media (min-width: 500px) {
       #app {
@@ -602,7 +791,6 @@
     <section id="screen-intro" class="screen active" aria-label="Welcome screen">
 
       <div class="logo-wrap">
-        <!-- Logo icon -->
         <div class="logo-icon" aria-hidden="true">
           <svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M22 4L38 34H6L22 4Z" stroke="#fff" stroke-width="2.5" stroke-linejoin="round" fill="none"/>
@@ -622,11 +810,11 @@
       </p>
 
       <div class="meta-row" aria-label="Quiz details">
-        <span>100 questions</span>
+        <span>15 random questions</span>
         <div class="meta-dot"></div>
         <span>5 dimensions</span>
         <div class="meta-dot"></div>
-        <span>~10 min</span>
+        <span>~2 min</span>
       </div>
 
       <button
@@ -690,30 +878,61 @@
     ========================================== -->
     <section id="screen-question" class="screen" aria-label="Question screen">
 
-      <!-- Progress -->
       <div class="progress-header">
         <div class="progress-meta">
           <span class="progress-label" id="q-category">Category</span>
-          <span class="progress-count" id="q-count" aria-live="polite">1 / 3</span>
+          <span class="progress-count" id="q-count" aria-live="polite">1 / 100</span>
         </div>
         <div class="progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="progress-bar-wrap">
           <div class="progress-fill" id="progress-fill"></div>
         </div>
       </div>
 
-      <!-- Category badge -->
       <div class="category-badge" id="q-badge" aria-hidden="true">EQ</div>
 
-      <!-- Question card -->
       <div class="question-card">
         <p class="question-number" id="q-number" aria-hidden="true">Question 01</p>
         <p class="question-text" id="q-text" aria-live="assertive"></p>
       </div>
 
-      <!-- Answer options -->
       <div class="options-list" id="options-list" role="group" aria-label="Answer options">
-        <!-- Rendered by JS -->
       </div>
+
+    </section>
+
+
+    <!-- ==========================================
+         SCREEN 4: RESULTS
+    ========================================== -->
+    <section id="screen-results" class="screen" aria-label="Results screen">
+
+      <div class="aura-score-wrap">
+        <span class="aura-score-label">Your AURA</span>
+        <span class="aura-score" id="aura-score-display">0</span>
+      </div>
+
+      <div class="personality-card">
+        <h2 class="personality-title" id="personality-title">Loading...</h2>
+        <p class="personality-desc" id="personality-desc">Calculating your results...</p>
+      </div>
+
+      <div class="dimensions-card">
+        <h3 class="dimensions-title">Your dimensions</h3>
+        <div id="dimensions-list">
+        </div>
+      </div>
+
+      <div class="insights-card">
+        <div id="insights-list">
+        </div>
+      </div>
+
+      <div class="btn-row">
+        <button class="btn-primary" onclick="shareResult()">Share your AURA ✦</button>
+        <button class="btn-secondary" onclick="retakeQuiz()">Retake</button>
+      </div>
+
+      <p class="hint-text">Share with friends · See who's got the highest AURA</p>
 
     </section>
 
@@ -721,72 +940,148 @@
 
 
   <!-- ============================================================
-       VANILLA JS — PHASE 1 SHELL
+       VANILLA JS — FULL AURA APP
   ============================================================ -->
   <script>
-    /* ============================================================
-       STATE
-    ============================================================ */
     const state = {
       userName: '',
       currentQ: 0,
-      answers: [],   // { category, score } per question
+      answers: [],
+      scores: { EQ: 0, Decision: 0, Social: 0, Ambition: 0, Awareness: 0 },
+      maxPerCategory: 0,
+      quizQuestions: []
     };
 
     /* ============================================================
-       QUESTIONS ARRAY
-       ⚠️  PLACEHOLDER — Replace with real 100 questions.
-       Each object shape:
-       {
-         question : String,
-         options  : [String, String, String, String],   // A B C D
-         scores   : [Number, Number, Number, Number],   // 0-4 each
-         category : "EQ" | "Decision" | "Social" | "Ambition" | "Awareness"
-       }
+       QUESTIONS ARRAY — ALL 100 QUESTIONS FROM BANK
     ============================================================ */
     const questions = [
-      {
-        question: "Your group has to pick a restaurant. Everyone's texting different options and no one's deciding. You:",
-        options: [
-          "Quietly wait — someone will figure it out eventually",
-          "Make a quick poll in the group and close it in 10 mins",
-          "Suggest one place with full confidence and commit",
-          "Check everyone's vibe before saying anything"
-        ],
-        scores: [0, 3, 4, 2],
-        category: "Decision"
-      },
-      {
-        question: "Your friend posts something online that you know isn't true. You:",
-        options: [
-          "DM them privately so they don't feel embarrassed",
-          "Comment the correct info calmly and move on",
-          "Let it go — it's not your business",
-          "Screenshot it and cringe with another friend"
-        ],
-        scores: [4, 3, 0, 1],
-        category: "EQ"
-      },
-      {
-        question: "It's the first week of college and you don't know anyone in the room. You:",
-        options: [
-          "Sit near someone who looks friendly and introduce yourself",
-          "Wait for someone to talk to you first",
-          "Take out your phone until it feels less awkward",
-          "Join whatever group looks most interesting"
-        ],
-        scores: [3, 1, 0, 4],
-        category: "Social"
-      }
+      {"question":"Exam results aaye. Tu pass, tera best friend fail. Tu:","options":["\"Arre yaar next time ho jayega\" bolke move on karta hai","Genuinely bura lagta hai, usse call karta hai","Happy feel karta hai but andar se guilty bhi","Kuch nahi karta, awkward feel hota hai"],"scores":[2,4,3,1],"category":"EQ"},
+      {"question":"Group chat mein kisi ne tujhe publicly roast kiya. Tu:","options":["Double roast karta hai wapas, full savage mode","Haha likh deta hai but andar thoda hurt hota hai","Ignore karta hai completely","DM karta hai aur honestly bolta hai bura laga"],"scores":[1,2,3,4],"category":"EQ"},
+      {"question":"Tera dost canteen mein akela baitha hai aur seedha nahi bol raha kya problem hai. Tu:","options":["\"Sab theek hai?\" poochh ke chhod deta hai","Uske paas baithta hai bina kuch poochhe","Baad mein poochhega, abhi disturb nahi karta","Apne kaam mein laga rehta hai"],"scores":[2,4,3,1],"category":"EQ"},
+      {"question":"Tu kisi pe bahut gusse mein hai. Tu:","options":["Turant bol deta hai, sab kuch bahar nikal deta hai","Kuch der chup rehta hai phir baat karta hai","Kabhi nahi bolta, andar hi andar jalta rehta hai","Memes bhejta hai passive aggressively"],"scores":[1,4,0,2],"category":"EQ"},
+      {"question":"Koi tujhe compliment deta hai. Tu andar se:","options":["Genuinely khush hota hai","Sochta hai woh kuch chahta hoga","Awkward feel karta hai aur dismiss kar deta hai","Overanalyze karta hai ki real tha ya nahi"],"scores":[4,1,2,3],"category":"EQ"},
+      {"question":"Tera friend ek hi problem ke baare mein 5th time bol raha hai. Tu:","options":["Phir se poora sunta hai, usse matter karta hai","Sunn raha hai but andar se bore ho raha hai","Gently bolta hai \"yaar kuch karna padega ab\"","Phone dekh ke haan haan karta rehta hai"],"scores":[4,2,3,1],"category":"EQ"},
+      {"question":"Tu kisi ke saath lad pada aur pata chala tu galat tha. Tu:","options":["Sorry bolta hai seedha, koi drama nahi","Sorry bolta hai but saath mein justify bhi karta hai","Sorry nahi bolta but behaviour se dikhata hai","Intezaar karta hai jab tak woh bhool jaaye"],"scores":[4,2,1,0],"category":"EQ"},
+      {"question":"Presentation mein tera dost atak gaya. Tu:","options":["Andar se cringe karta hai but kuch nahi karta","Uski baat complete karne mein help karta hai subtly","Bad feel karta hai but baad mein poochhta hai kaisa raha","Wahan se nazar hata leta hai"],"scores":[1,4,3,0],"category":"EQ"},
+      {"question":"Kisi cheez pe tu bahut excited hai but doston ko interest nahi. Tu:","options":["Chhod deta hai, akele enjoy nahi kar sakta","Phir bhi share karta hai, tujhe matter karta hai","Thoda hurt hota hai but adjust kar leta hai","Woh log nahi samjhe — aage badhta hai"],"scores":[1,3,2,4],"category":"EQ"},
+      {"question":"Koi teri copy uthaata hai bina permission ke exam mein. Baad mein:","options":["Yaar ki tarah chhod deta hai","Seedha bol deta hai next time permission le","Andar se irritate rehta hai but kuch nahi bolta","Usse avoid karne lagta hai silently"],"scores":[2,4,1,0],"category":"EQ"},
+      {"question":"Tu stressed hai but koi poochh raha hai \"sab theek?\" Tu:","options":["\"Haan haan sab sahi hai\" — full mask on","\"Thoda busy hoon\" — partial truth","Bata deta hai honestly agar trust karta hai","\"Baad mein baat karte hain\" — deflect mode"],"scores":[1,2,4,2],"category":"EQ"},
+      {"question":"Tu aur tera dost dono same cheez ke liye apply karte ho. Woh select hota hai, tu nahi. Tu:","options":["Congrats bolta hai genuinely","Congrats bolta hai but andar jealousy hai","Kuch nahi bolta, avoid karta hai","\"Sab setting thi\" bolke dismiss karta hai"],"scores":[4,2,1,0],"category":"EQ"},
+      {"question":"Koi tujhse apni personal problem share karta hai. Tera pehla impulse:","options":["Solution dena","Sunna aur samajhna","Relatable story share karna apni","Poochhna ki woh kya chahte hain — advice ya just vent"],"scores":[2,4,1,3],"category":"EQ"},
+      {"question":"Tera mood kharab hai. Dost mazak karta hai. Tu:","options":["Huns deta hai, adjust kar leta hai","Bata deta hai \"yaar abhi nahi\"","Chup ho jaata hai aur weird vibe create hoti hai","Irritate ho jaata hai aur wapas kaat-ta hai"],"scores":[3,4,1,0],"category":"EQ"},
+      {"question":"Class mein koi bekaar answer deta hai. Sablog haste hain. Tu:","options":["Tujhe bhi hassi aati hai but kuch nahi karta","Tu bhi has deta hai","Uske baad usse normal treat karta hai","Try karta hai topic change karne ka"],"scores":[2,0,4,3],"category":"EQ"},
+      {"question":"Tera dost tujhe bina reason bataye ignore karne laga. Tu:","options":["Tu bhi ignore karta hai wapas","Directly poochhta hai \"kya hua?\"","Doston se poochhta hai kya pata","Wait karta hai jab tak woh khud aaye"],"scores":[0,4,1,2],"category":"EQ"},
+      {"question":"Kisi ne tujhe publicly embarrass kiya. Andar se tu:","options":["Bahut hurt hota hai but cool dikhata hai","Genuinely move on karta hai","Us cheez ko ghanton baad tak sochta rehta hai","Revenge plan banaata hai"],"scores":[2,4,1,0],"category":"EQ"},
+      {"question":"Tu apni feelings kab express karta hai?","options":["Jab koi khud poochhe tab","Jab situation perfect lage","Jab zarurat hogi, bol dunga","Openly, tujhe koi issue nahi feelings share karne mein"],"scores":[1,2,3,4],"category":"EQ"},
+      {"question":"Tu notice karta hai jab koi fake hota hai?","options":["Hamesha, turant pata chal jaata hai","Kabhi kabhi, jab zyada obvious ho","Mushkil se, tu zyada trust karta hai","Nahi, log generally honest lagte hain tujhe"],"scores":[4,3,1,0],"category":"EQ"},
+      {"question":"Tera koi close nahi hai abhi life mein. Tu:","options":["It's fine, tu self-sufficient hai","Loneliness feel hota hai but deal kar leta hai","Bahut bura lagta hai","Actively koshish karta hai connections banana ki"],"scores":[3,2,1,4],"category":"EQ"},
+      {"question":"Kal tera important exam hai aur dost bol raha hai \"chal bahar chalte hain.\" Tu:","options":["Chala jaata hai, ek raat se kya farak padta hai","Mana karta hai bina guilt ke","Jaata hai but puri raat padhne ki anxiety rehta hai","Half hour jaata hai phir wapas aa jaata hai"],"scores":[1,4,0,2],"category":"Decision"},
+      {"question":"Do options hain — safe placement ya risky startup. Tu:","options":["Placement lo yaar, stability first","Startup, risk lo jab young ho","Sabse poochhega phir decide karega","Dono ke liye apply karo, baad mein sochenge"],"scores":[1,4,2,3],"category":"Decision"},
+      {"question":"Group mein koi decision nahi ho raha. Sablog tujhe dekh rahe hain. Tu:","options":["Ek option suggest karta hai confidently","\"Mujhe sab chalega\" bol deta hai","Vote karao — democracy best hai","Sabki baat sunn ke middle ground dhoondhta hai"],"scores":[4,0,3,2],"category":"Decision"},
+      {"question":"Tu ek wrong decision le chuka hai. Abhi pata chala. Tu:","options":["Immediately course correct karta hai","Pata tha galat tha but ab kya","Khud ko blame karta hai ghanta bhar","Lesson note karta hai aur aage badhta hai"],"scores":[4,1,0,3],"category":"Decision"},
+      {"question":"Kisi cheez mein 50-50 chance hai. Tu:","options":["Try karta hai, risk worth it lagta hai","Nahi karta, 50% failure too high","Depends on how bad the downside is","Coin flip karta hai literally"],"scores":[4,1,3,2],"category":"Decision"},
+      {"question":"Canteen mein choose karna hai — tried and tested dish ya naya item. Tu:","options":["Same wala lega, why risk lunch","Naya try karega, worst case bad food","Dost kya le raha hai dekh ke decide karega","Dono le leta hai"],"scores":[1,4,0,2],"category":"Decision"},
+      {"question":"Tu assignment last minute kar raha hai. Realise hota hai ek part missing hai. Tu:","options":["Incomplete submit karta hai, kuch toh hai","Raat bhar jaag ke complete karta hai","Dost se maang ke fill karta hai","Professor ko mail karta hai extension ke liye"],"scores":[1,4,0,3],"category":"Decision"},
+      {"question":"Kisi ne tujhse kuch maanga jiske liye tu tayyar nahi. Tu:","options":["Haan bol deta hai, baad mein tension","Seedha na bol deta hai","Itna ghoomata hai answer mein ki clear nahi hota","\"Main try karunga\" bol ke escape karta hai"],"scores":[0,4,1,2],"category":"Decision"},
+      {"question":"Ek cheez shuruaat mein interesting lagi but ab boring lag rahi hai. Tu:","options":["Chhod deta hai, time waste nahi karna","Finish karta hai, commitment matter karti hai","Postpone karta hai indefinitely","Kisi aur ko pass karta hai kaam"],"scores":[3,4,1,0],"category":"Decision"},
+      {"question":"Kisi important kaam ke liye teri gut feeling kuch aur keh rahi hai. Tu:","options":["Gut follow karta hai hamesha","Logic dekh ke decide karta hai","Doston se poochhta hai","Overthink karta hai jab tak window close na ho jaaye"],"scores":[4,3,1,0],"category":"Decision"},
+      {"question":"Plans change ho gaye last minute. Tu:","options":["Irritate hota hai but quickly adjust karta hai","Fine hai, tu flexible hai","Bahut upset hota hai","Future mein zyada plan nahi karta"],"scores":[3,4,0,2],"category":"Decision"},
+      {"question":"Exam mein ek question hai jiske baare mein tune padha nahi. Tu:","options":["Kuch bhi likh deta hai, attempt toh karo","Chhod deta hai, guess se marks nahi katenge","Adjacent topic se connect karke answer banataa hai","Dost ka paper dekhta hai"],"scores":[3,1,4,0],"category":"Decision"},
+      {"question":"Bade decision mein tu trust karta hai:","options":["Apni gut","Research aur data","Kisi experienced insaan ki advice","Majority kya kar rahi hai"],"scores":[4,3,2,0],"category":"Decision"},
+      {"question":"Ek cheez shuruaat kar ke beech mein realize kiya ye galat direction hai. Tu:","options":["Direction change karta hai turant","Complete karta hai, already invested","Pause karta hai aur sochta hai","Kisi aur ko bata ke decision delegate karta hai"],"scores":[4,1,3,0],"category":"Decision"},
+      {"question":"Teri life mein ek important choice hai jisme koi sahi jawab nahi. Tu:","options":["Jo dil bole woh","Jo safe lage woh","Jo logically best outcome de","Jab tak force na ho, decide hi nahi karta"],"scores":[4,1,3,0],"category":"Decision"},
+      {"question":"Tu ek decision le chuka hai. Sab log bol rahe hain tu galat hai. Tu:","options":["Reconsider karta hai, maybe they have a point","Apne decision pe stay karta hai confidently","Doubt mein aa jaata hai","Publicly agree karta hai but privately apni karta hai"],"scores":[3,4,1,2],"category":"Decision"},
+      {"question":"Tera phone kharaab ho gaya. Nayi phone lena hai. Tu:","options":["Research karta hai 2 hafte","Pehle option jo budget mein fit kare le leta hai","Dost se recommend karwata hai","YouTubers ka comparison video dekh ke decide karta hai"],"scores":[2,3,1,2],"category":"Decision"},
+      {"question":"Life mein kuch bada karna chahta hai. Starting kahan se karein pata nahi. Tu:","options":["Shuru karta hai kisi bhi point se","Plan banata hai pehle","Wait karta hai \"sahi time\" ka","Kisi mentor ya senior se guidance leta hai"],"scores":[4,3,0,2],"category":"Decision"},
+      {"question":"Tune kuch wrong kiya. Consequences saamne hain. Tu:","options":["Openly accept karta hai","Quietly fix karta hai bina bataye","Minimize karta hai situation ko","Blame shift karne ki koshish karta hai"],"scores":[4,3,1,0],"category":"Decision"},
+      {"question":"Teri zindagi mein ek bada change aane wala hai. Tu feel karta hai:","options":["Excited","Nervous but ready","Scared","Avoidance mode on"],"scores":[4,3,1,0],"category":"Decision"},
+      {"question":"Naye semester mein pehle din koi naya banda hai class mein. Tu:","options":["Khud jaake introduce karta hai","Wait karta hai woh aaye","Mutual dost ke through milega","Observe karta hai pehle, phir decide karta hai"],"scores":[4,1,2,3],"category":"Social"},
+      {"question":"Group hangout mein koi banda teri baat baar baar kaat raha hai. Tu:","options":["Apni baat khatam karta hai bina rukke","Ruk jaata hai, let him talk","Irritate hota hai andar se but kuch nahi karta","Baad mein ussse seedha bol deta hai"],"scores":[4,1,2,3],"category":"Social"},
+      {"question":"Tu kaisa dost hai?","options":["Jo hamesha available hai","Jo bakwaas nahi karta, straight up honest hai","Jo sab ke saath fit ho jaata hai","Jo sirf apne kuch logon ke liye exist karta hai"],"scores":[3,4,2,1],"category":"Social"},
+      {"question":"College fresher party mein tu:","options":["Dance floor pe sabse pehle","Corner mein apne log dhoondh raha hai","Sab se milta hai politely but limited energy hai","Thodi der mein excuse bana ke nikal jaata hai"],"scores":[4,1,2,0],"category":"Social"},
+      {"question":"Tujhe koi pasand karne lage toh tu:","options":["Direct hota hai, bata deta hai","Hints deta hai aur dekhta hai woh samjhe ya nahi","Dost ke through message karwata hai","Wait karta hai perfect moment ka jo kabhi nahi aata"],"scores":[4,2,0,1],"category":"Social"},
+      {"question":"Group mein conflict ho gaya. Tu:","options":["Mediator ban jaata hai","Side leta hai jo sahi lage","Dono se alag alag baat karta hai","Distance bana leta hai jab tak resolve na ho"],"scores":[4,3,2,0],"category":"Social"},
+      {"question":"Tera close dost kisi bure insaan ke saath hang out karne laga. Tu:","options":["Seedha bolta hai \"yaar ye banda sahi nahi lag raha\"","Chup rehta hai, uski life uski choice","Subtle hints deta hai","Wait karta hai woh khud realize kare"],"scores":[4,1,2,3],"category":"Social"},
+      {"question":"Social media pe teri post pe koi bakwaas comment karta hai. Tu:","options":["Publicly reply karta hai confidently","Block/delete karta hai silently","Screenshot karta hai aur dosto ko bhejta hai","Ignore karta hai, not worth it"],"scores":[3,2,1,4],"category":"Social"},
+      {"question":"Tere doston ke do groups hain jinho ek saath milna nahi chahte. Tu:","options":["Unhe force karta hai milne ke liye","Dono ke saath alag alag time spend karta hai","Jo bada group hai usse choose karta hai","Awkwardly dono mein juggle karta rehta hai"],"scores":[0,4,1,2],"category":"Social"},
+      {"question":"Koi teri burai kar raha hai tere peeth peeche. Pata chala. Tu:","options":["Seedha confront karta hai","Ignore karta hai, log log hain","Unse door rehta hai quietly","Aur logon ko bata ke drama banata hai"],"scores":[4,3,2,0],"category":"Social"},
+      {"question":"Tu kisi naye group mein hota hai. Conversation chal rahi hai. Tu:","options":["Opinions deta hai freely","Observe karta hai pehle, phir contribute karta hai","Sirf tab bolta hai jab directly poocha jaaye","Apne phone pe busy rehta hai mostly"],"scores":[4,3,1,0],"category":"Social"},
+      {"question":"Tera dost tujhse zyada successful ho gaya. Tu:","options":["Usse dekh ke aur mehnat karne ka mann karta hai","Thoda jealous feel hota hai secretly","Proud feel karta hai genuinely","Compare karne lagta hai khud ko"],"scores":[4,2,4,1],"category":"Social"},
+      {"question":"Ek banda hai jo clearly tujhe pasand nahi karta. Tu usse:","options":["Avoid karta hai completely","Professional rehta hai, koi drama nahi","Usse bhi nahi karta pasand publicly","Samajhne ki koshish karta hai ki kya problem hai"],"scores":[1,4,0,3],"category":"Social"},
+      {"question":"Tujhe kisi ki help chahiye. Tu:","options":["Seedha bol deta hai bina hesitate kiye","Hints deta hai aur dekhta hai woh samjhe ya nahi","Khud karta hai chahe time lage","Bahut zarurat ho tabhi maangta hai"],"scores":[4,1,2,3],"category":"Social"},
+      {"question":"Group photo mein tu hota hai:","options":["Front mein, confidently","Side mein, it's fine","Peechhe chhupta hai","Jo jagah mile le leta hai"],"scores":[4,2,0,3],"category":"Social"},
+      {"question":"Kisi ne tujhe bura feel karaaya by mistake. Tu:","options":["Bol deta hai immediately","Chhod deta hai, unintentional tha","Andar rakhta hai but yaad rehta hai","Passive aggressively treat karta hai"],"scores":[4,3,1,0],"category":"Social"},
+      {"question":"Tu apne doston ke saath sabse comfortable kab hota hai?","options":["Jab sirf 1-2 log hon","Jab bada group ho aur energy high ho","Jab koi plan nahi ho, bas timepass","Jab sab apne kaam mein busy ho, tu bhi apne mein"],"scores":[3,4,2,1],"category":"Social"},
+      {"question":"Tera dost kisi baat pe tujhse agree nahi karta. Tu:","options":["Debate karta hai till he sees your point","Agree to disagree kar leta hai","Drop kar deta hai, fight nahi karni","Baar baar laata rehta hai topic"],"scores":[3,4,1,0],"category":"Social"},
+      {"question":"Naye log milte hain. Tera first impression hota hai:","options":["Loud aur energetic","Calm aur observant","Funny aur entertaining","Quiet aur reserved"],"scores":[3,4,3,1],"category":"Social"},
+      {"question":"Tu sach mein khud ko sabse zyada kab express karta hai?","options":["Close doston ke saath","Strangers ke saath, less judgment","Akele, jab koi dekh nahi raha","Online, real life mein nahi"],"scores":[4,3,2,1],"category":"Social"},
+      {"question":"Exam mein zyada marks aaye kisi aur ke. Tera reaction:","options":["\"Bhai tune kaise kiya? Bata yaar\"","\"Setting hogi kuch\"","Quietly note karta hai ki kya different kiya unhone","Thoda hurt but outwardly nothing"],"scores":[4,0,3,2],"category":"Ambition"},
+      {"question":"Tera goal hai but roj procrastinate karta hai. Tu:","options":["Guilt feel karta hai but phir bhi nahi karta","System banata hai, schedule set karta hai","Motivational video dekhta hai aur next day same","Chhota chhota shuru karta hai"],"scores":[0,4,1,3],"category":"Ambition"},
+      {"question":"5 saal baad tu khud ko kahan dekh raha hai?","options":["Clear vision hai, har step pata hai","Rough idea hai, figure out hoga","Koi idea nahi, anxiety hota hai sochke","\"Jo hoga achha hoga\" mindset"],"scores":[4,3,0,1],"category":"Ambition"},
+      {"question":"Tu ek project mein kaam karta hai. Koi recognition nahi milta. Tu:","options":["Kaam karta rehta hai, recognition secondary hai","Demotivate ho jaata hai","Apna contribution visible karne ki koshish karta hai","Next time effort nahi lagata"],"scores":[4,1,3,0],"category":"Ambition"},
+      {"question":"Successful banda tujhse mil gaya. Tu:","options":["Nervously milta hai","Confidently engage karta hai, poochhta hai unka journey","Fanboy/fangirl moment","Observe karta hai quietly"],"scores":[1,4,1,3],"category":"Ambition"},
+      {"question":"Tera best kaam kisi aur ke naam ho gaya. Tu:","options":["Publicly correct karta hai","Chup rehta hai, log jaante hain sach","Andar bahut gussa hota hai","Kisi trusted insaan se bol deta hai"],"scores":[4,2,1,3],"category":"Ambition"},
+      {"question":"Teri life mein sabse badi distraction hai:","options":["Social media","Dost aur timepass","Overthinking aur anxiety","Kuch bhi nahi, tu focused rehta hai"],"scores":[1,2,0,4],"category":"Ambition"},
+      {"question":"Tu bored ho raha hai studies se. Tu:","options":["Kuch naya seekhna start karta hai side mein","Netflix on","Thoda break leke wapas aata hai","Doston ke saath hang karta hai"],"scores":[4,0,3,2],"category":"Ambition"},
+      {"question":"Ek baar tune mehnat ki aur result nahi aaya. Tu phir:","options":["Aur mehnat karta hai","Strategy change karta hai","Give up karta hai woh cheez","Kuch time baad wapas aata hai"],"scores":[4,3,0,2],"category":"Ambition"},
+      {"question":"Tera ek big dream hai. Koi serious nahi leta. Tu:","options":["Prove karta hai apne kaam se","Thoda doubt aata hai khud ko bhi","Unhe explain karta rehta hai","Apni cheez apne paas rakhta hai"],"scores":[4,1,2,3],"category":"Ambition"},
+      {"question":"Naya skill sikhna hai. Koi structure nahi hai. Tu:","options":["Jump in karta hai, figure out hoga","YouTube aur free resources dhoondh ke structure banata hai","Course milne tak wait karta hai","Kisi se mentor ban'ne ki request karta hai"],"scores":[4,3,1,2],"category":"Ambition"},
+      {"question":"Koi cheez achieve karne ke baad tu feel karta hai:","options":["Satisfied, aur ready for next","\"Ye toh chhota tha, kuch bada karna tha\"","Relief, finally khatam hua","Dosto ko bata ke celebrate karta hai first"],"scores":[4,2,3,3],"category":"Ambition"},
+      {"question":"Tu hardest kaam kab karta hai?","options":["Jab deadline ho","Jab mood ho","Roz, mood se independent","Jab koi dekh raha ho"],"scores":[2,1,4,0],"category":"Ambition"},
+      {"question":"Tu ek cheez consistently karta hai bina kisi ne bola. Woh hai:","options":["Padhna ya naya seekhna","Workout ya physical activity","Creative kuch banana","Kuch nahi honestly"],"scores":[4,3,3,0],"category":"Ambition"},
+      {"question":"Future ke baare mein teri genuine feeling hai:","options":["Excited, bahut kuch karna hai","Nervous but hopeful","Anxious mostly","Numb, sochta hi nahi"],"scores":[4,3,1,0],"category":"Ambition"},
+      {"question":"Tu failure se darr ke kuch nahi karta — yeh tere saath:","options":["Hamesha hota hai","Kabhi kabhi hota hai","Rare occasions pe","Nahi hota, tu action pe believe karta hai"],"scores":[0,2,3,4],"category":"Ambition"},
+      {"question":"Teri productivity ka peak time hai:","options":["Subah early","Raat ko jab sab so jaayein","Random hours, koi pattern nahi","Deadline ke 2 ghante pehle"],"scores":[3,3,1,2],"category":"Ambition"},
+      {"question":"Tu apni progress track karta hai?","options":["Haan, properly","Loose mein, head mein","Kabhi kabhi","Nahi, bas karta rehta hai"],"scores":[4,2,1,2],"category":"Ambition"},
+      {"question":"Koi teri capability pe doubt karta hai. Tu:","options":["Use it as fuel","Thoda down ho jaata hai","Prove karta hai without saying anything","Argue karta hai unse"],"scores":[4,1,4,2],"category":"Ambition"},
+      {"question":"Teri life mein sabse bada unfulfilled ambition abhi hai:","options":["Clearly defined, plan bhi hai","Idea hai but no action","Pata hi nahi kya chahiye","Chhota chhota karta rehta hai, bade ka darr hai"],"scores":[4,2,0,1],"category":"Ambition"},
+      {"question":"Koi teri ek sach-wali weakness bata de. Tu:","options":["Already pata tha, no surprise","Slightly defensive but acknowledge karta hai","\"Ye weakness nahi hai\" bol deta hai","Embarrassed feel karta hai"],"scores":[4,3,0,1],"category":"Awareness"},
+      {"question":"Tu kab sabse zyada insecure feel karta hai?","options":["Comparison hone pe","Jab koi tujhe seriously nahi leta","Publicly fail hone pe","Tu rarely insecure feel karta hai"],"scores":[2,3,1,4],"category":"Awareness"},
+      {"question":"Tu apna mood samajh paata hai?","options":["Haan, almost hamesha","Kabhi kabhi","Nahi, mood random aate hain","Tab samajh aata hai jab koi point out kare"],"scores":[4,2,0,1],"category":"Awareness"},
+      {"question":"Tera \"public wala tu\" aur \"private wala tu\" mein difference hai?","options":["Bahut zyada","Thoda","Nahi ke barabar","Tune kabhi socha hi nahi"],"scores":[1,3,4,0],"category":"Awareness"},
+      {"question":"Tune apne life mein ek pattern notice kiya hai jo repeat hota hai. Woh hai:","options":["Jo kaam important hota hai usse postpone karna","Log use karte hain aur tu let karta hai","Kuch achha hota hai toh tu khud hi kharaab karta hai","Tune aisa koi pattern notice nahi kiya"],"scores":[1,2,1,0],"category":"Awareness"},
+      {"question":"Jab tu galat hota hai:","options":["Pata chal jaata hai khud ko turant","Baad mein realize hota hai","Tab pata chalta hai jab koi bolta hai","Manta hi nahi"],"scores":[4,3,1,0],"category":"Awareness"},
+      {"question":"Tu apne baare mein log kya sochhte hain iske baare mein:","options":["Zyada sochta hai aur anxiety hoti hai","Thoda dhyan deta hai but overthink nahi karta","Genuinely care nahi karta","Actively manage karta hai apna image"],"scores":[0,3,4,1],"category":"Awareness"},
+      {"question":"Teri inner voice generally:","options":["Encouraging hoti hai","Bahut critical hoti hai","Depends on situation","Tune kabhi dhyan nahi diya"],"scores":[4,0,3,1],"category":"Awareness"},
+      {"question":"Jab tu akela hota hai, tu kya sochta hai mostly?","options":["Future plans aur goals","Past ki galtiyaan","Random thoughts, koi pattern nahi","Tune kabhi notice nahi kiya"],"scores":[4,0,2,1],"category":"Awareness"},
+      {"question":"Jab life mein sab achha chal raha hota hai, tu:","options":["Enjoy karta hai moment ko","Wait karta hai kab kharaab hoga","Aur mehnat karta hai capitalize karne ke liye","Slightly suspicious hota hai"],"scores":[4,0,3,1],"category":"Awareness"},
+      {"question":"Teri sabse badi \"I know I do this but can't stop\" cheez hai:","options":["Procrastination","Overthinking","People pleasing","Tu genuinely nahi jaanta"],"scores":[1,1,1,0],"category":"Awareness"},
+      {"question":"Jab tu stressed hota hai, iska sign hota hai:","options":["Neend nahi aati","Zyada khata hai ya bilkul nahi","Chidchida ho jaata hai","Tu stress pehchaan hi nahi paata jab tak bohut zyada na ho"],"scores":[2,2,2,0],"category":"Awareness"},
+      {"question":"Tu apni life mein kitna self-aware hai honestly?","options":["Bahut — sab jaanta hai apne baare mein","Average — kuch jaanta hai, kuch nahi","Kam — logon ne bataya tab pata chala","Nahi jaanta, ye quiz batayega"],"scores":[4,3,1,0],"category":"Awareness"},
+      {"question":"Ek cheez jo tu publicly claim karta hai but privately opposite hai:","options":["\"Mujhe kisi ki parwah nahi\"","\"Main bahut disciplined hoon\"","\"Main kabhi jealous nahi hota\"","Tune honestly kabhi aisa contradiction notice nahi kiya"],"scores":[1,1,1,4],"category":"Awareness"},
+      {"question":"Tu apni progress se:","options":["Satisfied hai mostly","Never satisfied, hamesha aur chahiye","Disappointed hai khud se","Neutral hai, compare nahi karta"],"scores":[4,2,0,3],"category":"Awareness"},
+      {"question":"3 saal pehle wale tu aur aaj ke tu mein:","options":["Bahut growth","Thodi growth","Almost same hai","Regressed in some ways"],"scores":[4,3,1,0],"category":"Awareness"},
+      {"question":"Jab koi tujhe accurately describe karta hai, tu feel karta hai:","options":["Seen","Slightly uncomfortable","Surprised ki unhone notice kiya","Defensive"],"scores":[4,2,3,0],"category":"Awareness"},
+      {"question":"Teri life mein sabse bada unresolved thing hai:","options":["Tu jaanta hai exactly kya hai","Vague idea hai","Nahi jaanta but jaanna chahta hai","Sochna hi nahi chahta"],"scores":[4,2,3,0],"category":"Awareness"},
+      {"question":"Tu apni galti mante time:","options":["Full responsibility leta hai","Sorry bolta hai but adds \"but...\"","Bahut time lagta hai acknowledge karne mein","Only jab koi proof ho"],"scores":[4,1,0,0],"category":"Awareness"},
+      {"question":"Is poore quiz ko answer karte time tu honestly feel kar raha tha:","options":["Interesting, sach mein socha khud ke baare mein","Kuch questions pe uncomfortable hua","Bas options click karta raha","Kuch questions pe realize hua cheezein jo pehle nahi socha tha"],"scores":[4,3,1,4],"category":"Awareness"}
     ];
-    /* ============================================================
-       END QUESTIONS ARRAY
-    ============================================================ */
 
+    function getRandomQuestions(count) {
+      const shuffled = [...questions].sort(() => Math.random() - 0.5);
+      return shuffled.slice(0, count);
+    }
 
-    /* ============================================================
-       PARTICLES — decorative background dots
-    ============================================================ */
+    const personalityLabels = {
+      "EQ+Awareness": { title: "The Human Lie Detector 👁️", desc: "You can read people like a cheap novel. You notice the micro-expressions, the fake laughs, the 'I'm fine' that really means 'I'm dying inside'. Use your powers for good, not evil (or do, we won't judge)." },
+      "Ambition+Decision": { title: "The Human Tornado 🌀", desc: "You don't wait for opportunities, you tackle them to the ground. You make decisions faster than most people choose what to eat for lunch. The world better keep up." },
+      "Social+EQ": { title: "The Professional People Whisperer 🤝", desc: "You could make friends with a rock. You have more emotional intelligence in your pinky than most people have in their entire body. You're the friend everyone wishes they had." },
+      "Awareness+Decision": { title: "The Rogue Philosopher 🧠", desc: "You know exactly who you are and you make moves accordingly. You're like a chess player but with real-life decisions. Everyone else is still playing checkers." },
+      "Ambition+Social": { title: "The Party CEO 🎉", desc: "You're the life of the party AND the one who knows how to turn it into a business empire. You could sell sand in the desert and make friends while doing it." },
+      "EQ+Decision": { title: "The Empathetic Assassin 🥷", desc: "You feel deeply but strike swiftly. You'll comfort you while also executing a 5-year plan. The most dangerous combo since chai and samosas." },
+      "Balanced": { title: "The Unicorn 🦄", desc: "You're so balanced you make yoga instructors jealous. You're basically the human equivalent of a well-adjusted Instagram feed. We're all impressed." },
+      "Low": { title: "The Beautiful Mystery 🎭", desc: "You're a puzzle wrapped in an enigma wrapped in a hoodie. You're just getting started on figuring yourself out, and honestly? That's kind of hot." }
+    };
+
+    const shareTemplates = [
+      "Yo! I just took the AURA personality quiz and I'm a {personality}! Scored {score}/100. You should definitely take this too and see what you are! [link]",
+      "Breaking news: I'm officially {personality} with an AURA score of {score}! Who would've guessed? Take the quiz to find your vibe! [link]",
+      "My AURA results are in... I'm {personality} (score: {score})! This quiz is scarily accurate. Check yours! [link]",
+      "Okay, this quiz just called me out. I'm {personality} with {score} AURA points. Take it and share your result! [link]",
+      "My friends NEED to see this. I'm {personality} (AURA: {score})! Take the quiz to find your type! [link]"
+    ];
+
     (function spawnParticles() {
       const container = document.getElementById('particles');
       const count = 18;
@@ -797,22 +1092,16 @@
         p.style.top   = Math.random() * 100 + '%';
         p.style.setProperty('--dur',   (3 + Math.random() * 5) + 's');
         p.style.setProperty('--delay', (Math.random() * 6) + 's');
-        // alternate a few particles to cyan
         if (i % 5 === 0) p.style.background = '#00F5FF';
         container.appendChild(p);
       }
     })();
 
-
-    /* ============================================================
-       SCREEN NAVIGATION
-    ============================================================ */
     function showScreen(nextId) {
       const current = document.querySelector('.screen.active');
       const next    = document.getElementById(nextId);
       if (!next || current === next) return;
 
-      // Exit animation on current
       if (current) {
         current.classList.add('exit');
         current.addEventListener('animationend', () => {
@@ -821,19 +1110,13 @@
         }, { once: true });
       }
 
-      // Slight delay so exit plays first
       setTimeout(() => {
         next.style.display = 'flex';
-        // Force reflow
         void next.offsetWidth;
         next.classList.add('active');
       }, 160);
     }
 
-
-    /* ============================================================
-       SCREEN 1 → SCREEN 2  (Intro → Name)
-    ============================================================ */
     function goToName() {
       showScreen('screen-name');
       setTimeout(() => {
@@ -841,10 +1124,6 @@
       }, 400);
     }
 
-
-    /* ============================================================
-       NAME VALIDATION
-    ============================================================ */
     function validateName() {
       const val = document.getElementById('user-name-input').value.trim();
       document.getElementById('btn-continue').disabled = val.length < 1;
@@ -857,42 +1136,42 @@
       }
     }
 
-
-    /* ============================================================
-       SCREEN 2 → SCREEN 3  (Name → Questions)
-    ============================================================ */
     function goToQuestions() {
       const val = document.getElementById('user-name-input').value.trim();
       if (!val) return;
       state.userName = val;
       state.currentQ = 0;
-      state.answers  = [];
+      state.answers = [];
+      state.scores = { EQ: 0, Decision: 0, Social: 0, Ambition: 0, Awareness: 0 };
+      
+      // Get 15 random questions
+      state.quizQuestions = getRandomQuestions(15);
+      
+      // Calculate max per category based on selected questions
+      const catCount = { EQ: 0, Decision: 0, Social: 0, Ambition: 0, Awareness: 0 };
+      state.quizQuestions.forEach(q => catCount[q.category]++);
+      state.maxPerCategory = {};
+      Object.keys(catCount).forEach(cat => state.maxPerCategory[cat] = catCount[cat] * 4);
+      
       renderQuestion(0);
       showScreen('screen-question');
     }
 
-
-    /* ============================================================
-       QUESTION RENDERER
-    ============================================================ */
     function renderQuestion(index) {
-      const q = questions[index];
+      const q = state.quizQuestions[index];
       if (!q) return;
 
-      const total = questions.length;
+      const total = state.quizQuestions.length;
       const pct   = Math.round((index / total) * 100);
 
-      // Progress bar
       document.getElementById('progress-fill').style.width = pct + '%';
       document.getElementById('progress-bar-wrap').setAttribute('aria-valuenow', pct);
 
-      // Labels
       document.getElementById('q-count').textContent    = `${index + 1} / ${total}`;
       document.getElementById('q-number').textContent   = 'Question ' + String(index + 1).padStart(2, '0');
       document.getElementById('q-category').textContent = q.category;
       document.getElementById('q-badge').textContent    = q.category;
 
-      // Question text — animate swap
       const qText = document.getElementById('q-text');
       qText.style.opacity = '0';
       setTimeout(() => {
@@ -901,7 +1180,6 @@
         qText.style.opacity = '1';
       }, 100);
 
-      // Options
       renderOptions(q, index);
     }
 
@@ -923,7 +1201,6 @@
         btn.addEventListener('click', () => pickOption(i, q, qIndex));
         list.appendChild(btn);
 
-        // Staggered entrance
         btn.style.opacity   = '0';
         btn.style.transform = 'translateX(-12px)';
         btn.style.transition = `opacity 250ms ease ${i * 60}ms, transform 250ms ease ${i * 60}ms`;
@@ -934,73 +1211,177 @@
       });
     }
 
-
-    /* ============================================================
-       HANDLE OPTION PICK
-    ============================================================ */
     function pickOption(optionIndex, q, qIndex) {
-      // Disable all options immediately
       const allBtns = document.querySelectorAll('.option-btn');
       allBtns.forEach(b => b.disabled = true);
-
-      // Highlight selected
       allBtns[optionIndex].classList.add('selected');
 
-      // Store answer
-      state.answers.push({
-        category: q.category,
-        score:    q.scores[optionIndex]
-      });
+      state.answers.push({ category: q.category, score: q.scores[optionIndex] });
+      state.scores[q.category] += q.scores[optionIndex];
 
-      // Auto-advance after 350ms
       setTimeout(() => {
         const next = qIndex + 1;
-        if (next < questions.length) {
+        if (next < state.quizQuestions.length) {
           state.currentQ = next;
           renderQuestion(next);
         } else {
-          // All questions done — Phase 2 will handle scoring + results
-          // For now, show a placeholder finish state
-          showFinishPlaceholder();
+          showResults();
         }
       }, 350);
     }
 
+    function showResults() {
+      const percentages = {
+        EQ: state.maxPerCategory.EQ > 0 ? Math.round((state.scores.EQ / state.maxPerCategory.EQ) * 100) : 0,
+        Decision: state.maxPerCategory.Decision > 0 ? Math.round((state.scores.Decision / state.maxPerCategory.Decision) * 100) : 0,
+        Social: state.maxPerCategory.Social > 0 ? Math.round((state.scores.Social / state.maxPerCategory.Social) * 100) : 0,
+        Ambition: state.maxPerCategory.Ambition > 0 ? Math.round((state.scores.Ambition / state.maxPerCategory.Ambition) * 100) : 0,
+        Awareness: state.maxPerCategory.Awareness > 0 ? Math.round((state.scores.Awareness / state.maxPerCategory.Awareness) * 100) : 0
+      };
 
-    /* ============================================================
-       TEMPORARY FINISH PLACEHOLDER
-       (Will be replaced in Phase 2 with full results screen)
-    ============================================================ */
-    function showFinishPlaceholder() {
-      const app = document.getElementById('app');
-      const placeholder = document.createElement('section');
-      placeholder.className = 'screen active';
-      placeholder.style.cssText = 'display:flex; flex-direction:column; align-items:center; gap:24px; text-align:center;';
-      placeholder.innerHTML = `
-        <div class="logo-icon" style="width:64px;height:64px;border-radius:20px;">
-          <svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" width="36" height="36">
-            <path d="M22 4L38 34H6L22 4Z" stroke="#fff" stroke-width="2.5" stroke-linejoin="round" fill="none"/>
-            <circle cx="22" cy="26" r="4" fill="#fff" opacity="0.9"/>
-          </svg>
-        </div>
-        <div>
-          <h2 style="font-size:26px;font-weight:800;margin-bottom:8px;">Nice work, ${escapeHtml(state.userName)}! ✦</h2>
-          <p style="color:var(--text-muted);font-size:15px;line-height:1.5;">Scoring engine coming in Phase 2.<br/>Your answers have been captured.</p>
-        </div>
-        <button class="btn-primary" onclick="location.reload()" style="max-width:320px;">Retake Quiz</button>
-      `;
+      const overallAura = Math.round((percentages.EQ + percentages.Decision + percentages.Social + percentages.Ambition + percentages.Awareness) / 5);
 
-      // Hide current screen
-      document.getElementById('screen-question').classList.remove('active');
-      document.getElementById('screen-question').style.display = 'none';
-      app.appendChild(placeholder);
+      const sortedCategories = Object.entries(percentages).sort((a, b) => b[1] - a[1]);
+      const top2 = [sortedCategories[0][0], sortedCategories[1][0]].sort().join('+');
+      const lowestCat = sortedCategories[sortedCategories.length - 1][0];
+
+      let personalityKey = top2;
+      const values = Object.values(percentages);
+      const min = Math.min(...values);
+      const max = Math.max(...values);
+      const isBalanced = (max - min) <= 20;
+      const lowCount = values.filter(v => v < 40).length;
+
+      if (lowCount >= 3) personalityKey = 'Low';
+      else if (isBalanced) personalityKey = 'Balanced';
+      else if (!personalityLabels[personalityKey]) personalityKey = 'Balanced';
+
+      const personality = personalityLabels[personalityKey];
+      showScreen('screen-results');
+
+      animateScore('aura-score-display', 0, overallAura, 1500);
+
+      setTimeout(() => {
+        document.getElementById('personality-title').textContent = personality.title;
+        document.getElementById('personality-desc').textContent = personality.desc;
+      }, 800);
+
+      renderDimensions(percentages);
+      renderInsights(sortedCategories[0][0], sortedCategories[1][0], lowestCat);
+
+      state.finalResult = { overallAura, personality, percentages };
     }
 
-    /* Simple HTML escape to prevent XSS */
+    function animateScore(elementId, start, end, duration) {
+      const el = document.getElementById(elementId);
+      const startTime = performance.now();
+      function update(currentTime) {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const easeOut = 1 - Math.pow(1 - progress, 3);
+        const current = Math.round(start + (end - start) * easeOut);
+        el.textContent = current;
+        if (progress < 1) requestAnimationFrame(update);
+      }
+      requestAnimationFrame(update);
+    }
+
+    function renderDimensions(percentages) {
+      const container = document.getElementById('dimensions-list');
+      const dims = ['EQ', 'Decision', 'Social', 'Ambition', 'Awareness'];
+      container.innerHTML = '';
+
+      dims.forEach((dim, i) => {
+        const row = document.createElement('div');
+        row.className = 'dimension-row';
+        row.innerHTML = `
+          <div class="dimension-header">
+            <span class="dimension-name">${dim}</span>
+            <span class="dimension-value" id="dim-val-${i}">0%</span>
+          </div>
+          <div class="dimension-track">
+            <div class="dimension-fill" id="dim-fill-${i}"></div>
+          </div>
+        `;
+        container.appendChild(row);
+
+        setTimeout(() => {
+          document.getElementById(`dim-fill-${i}`).style.width = percentages[dim] + '%';
+          animateScore(`dim-val-${i}`, 0, percentages[dim], 800);
+        }, 300 + (i * 150));
+      });
+    }
+
+    function renderInsights(top1, top2, lowest) {
+      const container = document.getElementById('insights-list');
+      const strengths = {
+        EQ: "You're basically a human mood ring. You can pick up on vibes faster than a TikTok trend.",
+        Decision: "You make choices quicker than your friend decides what to order on Swiggy.",
+        Social: "You could make friends with a vending machine. People just gravitate towards you.",
+        Ambition: "Your grind is so real, even the hustle is impressed. You're going places.",
+        Awareness: "You know yourself better than your mom knows what you're hiding in your room."
+      };
+
+      const weaknesses = {
+        EQ: "Emotions? What are those? You prefer to let your brain do the talking.",
+        Decision: "Choosing what to watch on Netflix takes you 45 minutes. Big decisions? Forget it.",
+        Social: "Large groups make you want to find the nearest corner and turn into a plant.",
+        Ambition: "Your motivation is on a vacation and hasn't sent a postcard yet. We've all been there.",
+        Awareness: "Self-reflection? Is that when you think about what to eat for dinner?"
+      };
+
+      container.innerHTML = `
+        <div class="insight-item">
+          <div class="insight-icon strength">💪</div>
+          <div class="insight-content">
+            <div class="insight-title">Strength #1 — ${top1}</div>
+            <div class="insight-text">${strengths[top1]}</div>
+          </div>
+        </div>
+        <div class="insight-item">
+          <div class="insight-icon strength">✨</div>
+          <div class="insight-content">
+            <div class="insight-title">Strength #2 — ${top2}</div>
+            <div class="insight-text">${strengths[top2]}</div>
+          </div>
+        </div>
+        <div class="insight-item">
+          <div class="insight-icon weakness">🔍</div>
+          <div class="insight-content">
+            <div class="insight-title">Growth area — ${lowest}</div>
+            <div class="insight-text">${weaknesses[lowest]}</div>
+          </div>
+        </div>
+      `;
+    }
+
+    function shareResult() {
+      const template = shareTemplates[Math.floor(Math.random() * shareTemplates.length)];
+      const text = template
+        .replace('{personality}', state.finalResult.personality.title)
+        .replace('{score}', state.finalResult.overallAura);
+      
+      if (navigator.share) {
+        navigator.share({ text });
+      } else {
+        navigator.clipboard.writeText(text);
+        alert('Copied to clipboard! 📋 Go share it with your friends!');
+      }
+    }
+
+    function retakeQuiz() {
+      state.userName = '';
+      state.currentQ = 0;
+      state.answers = [];
+      state.scores = { EQ: 0, Decision: 0, Social: 0, Ambition: 0, Awareness: 0 };
+      document.getElementById('user-name-input').value = '';
+      document.getElementById('btn-continue').disabled = true;
+      showScreen('screen-intro');
+    }
+
     function escapeHtml(str) {
       return str.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
     }
-
   </script>
 
 </body>
